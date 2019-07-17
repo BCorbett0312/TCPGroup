@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { User } from "../user";
 import { Observable} from "rxjs";
-import {Message} from "../message-module/message";
+
 
 
 
@@ -14,11 +14,11 @@ export class UserService{
 
 
   constructor(private http: HttpClient){
-    this.usersUrl= 'http://localhost:8080/users';
+    this.usersUrl= 'https://teamac.herokuapp.com/users';
   }
 
   public findAll(): Observable<User[]> {
-    this.sendto = 'http://localhost:8080/users';
+    this.sendto = 'https://teamac.herokuapp.com/users';
     return this.http.get<User[]>(this.sendto);
   }
 

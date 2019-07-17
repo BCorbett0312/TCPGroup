@@ -9,7 +9,7 @@ export class MessageService{
   sendto: string;
 
   constructor(private http: HttpClient){
-    this.messagesUrl= 'http://localhost:8080/messages';
+    this.messagesUrl= 'https://teamac.herokuapp.com/messages';
   }
 
   public save(message: Message){
@@ -18,7 +18,7 @@ export class MessageService{
 
   public findAll(channelId: number): Observable<Message[]> {
 
-    this.sendto = 'http://localhost:8080/messages/' + channelId;
+    this.sendto = 'https://teamac.herokuapp.com/messages/' + channelId;
     return this.http.get<Message[]>(this.sendto);
   }
 

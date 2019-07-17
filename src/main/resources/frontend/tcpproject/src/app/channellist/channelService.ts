@@ -9,12 +9,12 @@ export class ChannelService{
   sendto: string;
 
   constructor(private http: HttpClient){
-    this.channelsUrl= 'http://localhost:8080/channels';
+    this.channelsUrl= 'https://teamac.herokuapp.com/channels';
   }
 
   public findAll(): Observable<Channel[]> {
 
-    this.sendto = 'http://localhost:8080/channels';
+    this.sendto = 'https://teamac.herokuapp.com/channels';
     return this.http.get<Channel[]>(this.sendto);
   }
 
