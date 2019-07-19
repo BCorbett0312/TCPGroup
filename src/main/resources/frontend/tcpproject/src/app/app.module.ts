@@ -1,18 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginbarComponent } from './loginbar/loginbar.component';
+import { ChannellistComponent } from './channellist/channellist.component';
+import { MessageListComponent } from './message-module/message-list/message-list.component';
+import { MessageComposeComponent } from './message-module/message-compose/message-compose.component';
+import { AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import {MessageService} from "./message-module/messageService";
+import {UserService} from "./channellist/userService";
+import {ChannelService} from "./channellist/channelService";
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginbarComponent,
+    ChannellistComponent,
+    MessageListComponent,
+    LoginbarComponent,
+    MessageComposeComponent,
+
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [MessageService,UserService,ChannelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
