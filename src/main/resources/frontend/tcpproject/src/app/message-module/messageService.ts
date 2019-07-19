@@ -6,7 +6,7 @@ import { Observable} from "rxjs";
 @Injectable()
 export class MessageService{
   private messagesUrl: string;
-  sendto: string;
+  private sendto: string;
 
   constructor(private http: HttpClient){
     this.messagesUrl= 'https://teamac.herokuapp.com/messages';

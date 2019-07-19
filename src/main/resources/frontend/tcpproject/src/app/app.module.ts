@@ -9,7 +9,6 @@ import { AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {MessageService} from "./message-module/messageService";
-import { MessageModuleComponent } from './message-module/message-module.component';
 import {UserService} from "./channellist/userService";
 import {ChannelService} from "./channellist/channelService";
 
@@ -22,7 +21,7 @@ import {ChannelService} from "./channellist/channelService";
     MessageListComponent,
     LoginbarComponent,
     MessageComposeComponent,
-    MessageModuleComponent
+
 
   ],
   imports: [
