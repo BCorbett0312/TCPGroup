@@ -1,7 +1,7 @@
 
 
   <app-loginbar #loginbarComponent (updateMessageComponents)="messageComposeComponent.updateUserAndLoginStatus(loginbarComponent.userReturned);
-    channelListComponent.logIn()"
+            channelListComponent.logIn()"
                 (userLogOut)="messageComposeComponent.logOut(); channelListComponent.logOut()">
   </app-loginbar>
 

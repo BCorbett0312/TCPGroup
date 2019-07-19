@@ -24,6 +24,7 @@ export class ChannellistComponent implements OnInit {
   ngOnInit() {
     this.userService.findAll().subscribe(data => this.users = data)
     this.channelService.findAll().subscribe(data => this.channels = data)
+
   }
 
   onChannelSelect(channel: Channel): void{
@@ -36,8 +37,8 @@ export class ChannellistComponent implements OnInit {
 
   logIn(){
     this.userLoggedIn = true;
-    this.userService.findAll().subscribe(data => this.users = data)
-    this.channelService.findAll().subscribe(data => this.channels = data)
+    this.userService.findAll().subscribe(data => this.users = data);
+    this.channelService.findAll().subscribe(data => this.channels = data);
   }
 
   onUserSelect(user: User): void{
@@ -54,11 +55,13 @@ export class ChannellistComponent implements OnInit {
 
   logOut(){
     this.userLoggedIn = false;
-    this.selectedChannel = new Channel();
+    this.selectedChannel = this.channels[0];
     this.updateSelectedItem();
   }
 
-
+  setSelectedOnInit(){
+    this.selectedChannel = this.channels[0];
+  }
 
 }
 
