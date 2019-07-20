@@ -2,6 +2,7 @@ package com.TCPGroup.project.Controllers;
 
 
 import com.TCPGroup.project.Models.Channel;
+import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Services.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,7 +35,10 @@ public class ChannelController {
 
     }
 
-
+    @GetMapping("/channels/{id}/users")
+    public List<User> getUsersByChannelId(@PathVariable Integer id){
+        return this.channelService.getUsersByChannelId(id);
+    }
 
 
 }

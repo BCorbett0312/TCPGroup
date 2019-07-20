@@ -1,10 +1,13 @@
 package com.TCPGroup.project.Services;
 
+import com.TCPGroup.project.Models.Channel;
+import com.TCPGroup.project.Models.Subscription;
 import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +16,8 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    SubscriptionService subscriptionService;
 
     public UserService(UserRepository userRepository) {
         this.userRepository=userRepository;
@@ -35,5 +40,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
+    public List<Channel> getChannelsByUserId(Integer userId){
+        List<Channel> channels = new ArrayList<>();
+        List<Subscription> subs = this.subscriptionService.getSubscriptionsByUserId(userId);
+        for(Subscription sub:subs) channels.add(sub.getChannel());
+        return channels;
+    }
 }

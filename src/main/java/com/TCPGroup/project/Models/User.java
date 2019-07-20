@@ -1,6 +1,7 @@
 package com.TCPGroup.project.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,6 +16,8 @@ public class User {
     @Transient
     private Boolean authenticated;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Subscription> subscriptions;
 
     public User() {
         authenticated = null;
@@ -50,4 +53,7 @@ public class User {
         this.authenticated = authenticated;
     }
 
+    public List<Subscription> getSubscriptions() { return subscriptions; }
+
+    public void setSubscriptions(List<Subscription> subscriptions) { this.subscriptions = subscriptions; }
 }

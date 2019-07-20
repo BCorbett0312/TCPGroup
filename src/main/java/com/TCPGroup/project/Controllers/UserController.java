@@ -1,5 +1,6 @@
 package com.TCPGroup.project.Controllers;
 
+import com.TCPGroup.project.Models.Channel;
 import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class UserController {
     @GetMapping("/users/auth/{username}/{password}")
     public User authenticateUser(@PathVariable String password, @PathVariable String username) {
         return this.userService.authenticateUser(username, password);
+    }
+
+    @GetMapping("/users/{id}/channels")
+    public List<Channel> getChannelsByUserId(@PathVariable Integer id){
+        return this.userService.getChannelsByUserId(id);
     }
 
     @PostMapping("/users")

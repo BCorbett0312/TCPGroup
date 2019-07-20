@@ -25,7 +25,7 @@ public class MessageService {
     }
 
     public List<Message> getMessageByChannel(Integer toChannelId){
-        messageList = messageRepository.getMessagesByToChannelId(toChannelId);
+        messageList = messageRepository.getMessagesByChannel(toChannelId);
 
         Collections.sort(messageList, compareById.reversed());
 

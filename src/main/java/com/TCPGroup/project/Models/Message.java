@@ -1,9 +1,6 @@
 package com.TCPGroup.project.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Message {
@@ -11,13 +8,19 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer fromUserId;
-    private Integer toChannelId;
+
+    @OneToOne
+    private User user;
+
+    @OneToOne
+    private Channel channel;
+
     private String body;
+
+    @Transient
     private String fromUsername;
 
-    public Message() {
-    }
+    public Message() { }
 
     public Integer getId() {
         return id;
@@ -27,20 +30,21 @@ public class Message {
         this.id = id;
     }
 
-    public Integer getFromUserId() {
-        return fromUserId;
+    public Integer getUser() {
+        return user.getId();
     }
 
-    public void setFromUserId(Integer fromUserId) {
-        this.fromUserId = fromUserId;
+    public void setUser(User user) {
+        this.user = user;
+        this.fromUsername= user.getUsername();
     }
 
-    public Integer getToChannelId() {
-        return toChannelId;
+    public Integer getChannel() {
+        return channel.getId();
     }
 
-    public void setToChannelId(Integer toChannelId) {
-        this.toChannelId = toChannelId;
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
 
     public String getBody() {
