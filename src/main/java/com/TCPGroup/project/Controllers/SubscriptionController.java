@@ -3,8 +3,7 @@ package com.TCPGroup.project.Controllers;
 import com.TCPGroup.project.Models.Subscription;
 import com.TCPGroup.project.Services.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,11 +18,19 @@ public class SubscriptionController {
         this.subscriptionService=subscriptionService;
     }
 
-    public List<Subscription> getSubscriptionsByUserId(Integer userId){
+    @GetMapping("/users/{userId}/subscriptions")
+    public List<Subscription> getSubscriptionsByUserId(@PathVariable Integer userId){
         return this.subscriptionService.getSubscriptionsByUserId(userId);
     }
 
-    public List<Subscription> getSubscriptionsByChannelId(Integer channelId){
+    @GetMapping("/channels/{channelId}/subscriptions")
+    public List<Subscription> getSubscriptionsByChannelId(@PathVariable Integer channelId){
         return this.subscriptionService.getSubscriptionsByChannelId(channelId);
     }
+
+    @PostMapping("/subscriptions")
+    public Subscription createNewSubscription(@RequestBody Subscription newSubscription){
+        return this.subscriptionService.createSubscription(newSubscription);
+    }
+
 }

@@ -16,7 +16,8 @@ public class User {
     @Transient
     private Boolean authenticated;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userId")
     private List<Subscription> subscriptions;
 
     public User() {

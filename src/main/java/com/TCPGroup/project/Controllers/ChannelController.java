@@ -5,10 +5,7 @@ import com.TCPGroup.project.Models.Channel;
 import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Services.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,13 +23,16 @@ public class ChannelController {
     @GetMapping("/channels")
     public List<Channel> getAllChannels(){
         return channelService.getAllChannels();
-
     }
 
     @GetMapping("/channels/{id}")
     public Channel getChannelById(@PathVariable Integer id){
         return channelService.getChannelById(id);
+    }
 
+    @GetMapping("/channels/{id}/userids")
+    public List<Integer> getUserIdsByChannelId(@PathVariable Integer id){
+        return this.channelService.getUserIdsByChannelId(id);
     }
 
     @GetMapping("/channels/{id}/users")
@@ -40,5 +40,14 @@ public class ChannelController {
         return this.channelService.getUsersByChannelId(id);
     }
 
+    @PostMapping("/channels")
+    public Channel createNewChannel(@RequestBody Channel newChannel){
+        return this.channelService.createChannel(newChannel);
+    }
+
+    @GetMapping("/channels/standard")
+    public List<Channel> getStandardChannels(){
+        return channelService.getStandardChannels();
+    }
 
 }

@@ -34,6 +34,11 @@ public class UserController {
         return this.userService.authenticateUser(username, password);
     }
 
+    @GetMapping("/users/{id}/channelids")
+    public List<Integer> getChannelIdsByUserId(@PathVariable Integer id){
+        return this.userService.getChannelIdsByUserId(id);
+    }
+
     @GetMapping("/users/{id}/channels")
     public List<Channel> getChannelsByUserId(@PathVariable Integer id){
         return this.userService.getChannelsByUserId(id);

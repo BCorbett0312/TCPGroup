@@ -11,7 +11,8 @@ public class Channel {
     private String name;
     private boolean direct;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "channel")
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "channel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "channelId")
     private List<Subscription> subscriptions;
 
     public Channel(){ }

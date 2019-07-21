@@ -11,8 +11,6 @@ export class UserService{
   private usersUrl: string;
   sendto: string;
 
-
-
   constructor(private http: HttpClient){
     this.usersUrl= 'https://teamac.herokuapp.com/users';
   }

@@ -19,6 +19,9 @@ public class UserService {
     @Autowired
     SubscriptionService subscriptionService;
 
+    @Autowired
+    ChannelService channelService;
+
     public UserService(UserRepository userRepository) {
         this.userRepository=userRepository;
     }
@@ -40,10 +43,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<Channel> getChannelsByUserId(Integer userId){
-        List<Channel> channels = new ArrayList<>();
+    public List<Integer> getChannelIdsByUserId(Integer userId){
+        List<Integer> channelIds = new ArrayList<>();
         List<Subscription> subs = this.subscriptionService.getSubscriptionsByUserId(userId);
-        for(Subscription sub:subs) channels.add(sub.getChannel());
-        return channels;
+        for(Subscription sub:subs) channelIds.add(sub.getChannelId());
+        return channelIds;
+    }
+
+    public List<User> getUsersByIds(List<Integer> ids){
+        return this.userRepository.findAllByIdIn(ids);
+    }
+
+    public List<Channel> getChannelsByUserId(Integer userId){
+        return this.channelService.getChannelsByIds(this.getChannelIdsByUserId(userId));
     }
 }
