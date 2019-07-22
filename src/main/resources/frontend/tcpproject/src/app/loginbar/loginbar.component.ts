@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Injectable, OnInit, Output, ViewChild} from '@angular/core';
 import{ User} from "../user";
 import {UserService} from "../channellist/userService";
 
@@ -9,6 +9,7 @@ import {UserService} from "../channellist/userService";
   templateUrl: './loginbar.component.html',
   styleUrls: ['./loginbar.component.css']
 })
+
 export class LoginbarComponent implements OnInit {
 
   userToAuth: User;
@@ -17,6 +18,7 @@ export class LoginbarComponent implements OnInit {
   @ViewChild("passwordField", { static: false }) passwordField: ElementRef;
   @ViewChild("userNameField", { static: false }) userNameField: ElementRef;
   @Output() updateMessageComponents = new EventEmitter();
+  @Output() userLogOut = new EventEmitter();
   newUserModal: boolean;
   showNavBar: boolean;
 
@@ -36,16 +38,31 @@ export class LoginbarComponent implements OnInit {
     await this.userService.authenticateUser(this.userToAuth).then(data => this.userReturned = data);
     if(this.userReturned === null){
     }else {this.userIsAuthenticated = true;}
-    console.log(this.userReturned);
+    this.clearField();
     this.updateMessageComponents.emit();
 
-    this.clearField();
   }
 
+  async onLogOut(){
+    this.userToAuth = new User;
+    this.userReturned = null;
+    this.userIsAuthenticated = false;
+    this.userLogOut.emit();
+    // this.clearField();
 
+  }
 
   clearField(){
+    this.clearPassword();
+    this.clearUserName();
+
+  }
+
+  clearPassword(){
     this.passwordField.nativeElement.value = '';
+  }
+
+  clearUserName(){
     this.userNameField.nativeElement.value = '';
   }
 
@@ -61,6 +78,7 @@ export class LoginbarComponent implements OnInit {
     console.log(this.userToAuth);
     this.userService.createNewUser(this.userToAuth);
     this.updateNewUserModal();
+    this.clearField();
 
   }
 

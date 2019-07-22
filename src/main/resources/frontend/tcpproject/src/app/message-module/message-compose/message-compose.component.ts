@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable} from '@angular/core';
 import { ActivatedRoute, Router} from "@angular/router";
 import { MessageService} from "../messageService";
 import {Message} from "../message";
@@ -10,6 +10,7 @@ import {User} from "../../user";
   templateUrl: './message-compose.component.html',
   styleUrls: ['./message-compose.component.css']
 })
+
 export class MessageComposeComponent implements OnInit {
 
   message: Message;
@@ -72,7 +73,10 @@ export class MessageComposeComponent implements OnInit {
       this.userLoggedIn();}
   }
 
-
+  logOut(){
+    console.log("logged Out")
+    this.isLoggedIn = false;
+  }
 
   clearField(){
     this.messageField.nativeElement.value = '';

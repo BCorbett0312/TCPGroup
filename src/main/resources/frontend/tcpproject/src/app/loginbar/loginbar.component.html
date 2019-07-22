@@ -16,8 +16,8 @@
     <ul class="navbar-nav ml-auto flex-nowrap">
       <li class="nav-item">
         <form class="form-inline my-2 my-md-0 userNameForm">
-          <input #userNameField class="userNameField" id="userUserName" class="form-control" type="text" placeholder="User Name" [(ngModel)]="userToAuth.username" name="username">
-          <a class="clear" (click)="userToAuth.username=null">
+          <input #userNameField class="userName-Field" id="userUserName" class="form-control" type="text" placeholder="User Name" [(ngModel)]="userToAuth.username" name="username">
+          <a class="clear" (click)="userToAuth.username">
             <span class="glyphicon glyphicon-remove"></span>
           </a>
         </form>
@@ -31,18 +31,28 @@
         </form>
       </li>
       <li class="nav-item">
-        <button class="btn btn-outline-success my-2 my-sm-0" type = "button" (click)="onLogin(); ">Login</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type = "button" (click)="onLogin(); clearField()">Login</button>
         <button class="btn btn-outline-success my-2 my-sm-0 newUserButton" type="submit" (click)="updateNewUserModal()">New User</button>
       </li>
     </ul>
   </div>
 
+
+
+
   <!--Navbar After Login-------------->
 
   <div  *ngIf="userIsAuthenticated === true">
-    <a class="navbar-brand navbar-right" href="#">
-      Welcome {{userReturned.username}}
-    </a>
+    <ul class = "navbar-nav ml-auto flex-nowrap">
+      <li>
+        <a class="navbar-brand navbar-right" href="#">
+          Welcome {{userReturned.username}}
+        </a>
+      </li>
+      <li>
+        <button class="btn btn-outline-success my-2 my-sm-0" type = "button" (click)="onLogOut()">Log Out</button>
+      </li>
+     </ul>
   </div>
 </nav>
 
