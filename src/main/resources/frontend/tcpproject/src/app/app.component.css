@@ -7,4 +7,21 @@ app-message-compose {
 }
 app-message-list {
   overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
 }
+
+.app{
+  width: 100%;
+  max-width: 960px;
+  height: 500px;
+  margin: 0 auto;
+  display: flex;
+  border: 1px solid #ccc;
+  margin-top: 30px;
+}
+
+
