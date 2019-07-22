@@ -13,7 +13,7 @@ import {ChannelService} from "./channelService";
 export class ChannellistComponent implements OnInit {
   channels: Channel[];
   users: User[];
-
+  userLoggedIn = false;
   selectedChannel: Channel;
   selectedUser: User;
   @Output() updateOtherModules = new EventEmitter();
@@ -34,6 +34,12 @@ export class ChannellistComponent implements OnInit {
 
   }
 
+  logIn(){
+    this.userLoggedIn = true;
+    this.userService.findAll().subscribe(data => this.users = data)
+    this.channelService.findAll().subscribe(data => this.channels = data)
+  }
+
   onUserSelect(user: User): void{
     this.selectedChannel=null;
     this.selectedUser=user;
@@ -45,6 +51,14 @@ export class ChannellistComponent implements OnInit {
     this.updateOtherModules.emit(this.selectedChannel.id);
 
   }
+
+  logOut(){
+    this.userLoggedIn = false;
+    this.selectedChannel = new Channel();
+    this.updateSelectedItem();
+  }
+
+
 
 }
 

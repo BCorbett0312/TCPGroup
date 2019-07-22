@@ -9,9 +9,9 @@ import { AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {MessageService} from "./message-module/messageService";
-import { MessageModuleComponent } from './message-module/message-module.component';
 import {UserService} from "./channellist/userService";
 import {ChannelService} from "./channellist/channelService";
+import {EnvService} from "./env.service";
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import {ChannelService} from "./channellist/channelService";
     MessageListComponent,
     LoginbarComponent,
     MessageComposeComponent,
-    MessageModuleComponent
+
 
   ],
   imports: [
@@ -31,7 +31,7 @@ import {ChannelService} from "./channellist/channelService";
     HttpClientModule,
     FormsModule
   ],
-  providers: [MessageService,UserService,ChannelService],
+  providers: [MessageService,UserService,ChannelService, EnvService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

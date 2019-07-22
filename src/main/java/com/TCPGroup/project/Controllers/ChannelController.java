@@ -11,7 +11,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ChannelController {
+public class
+ChannelController {
 
     @Autowired
     ChannelService channelService;
