@@ -2,15 +2,15 @@ import {Injectable} from "@angular/core";
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { Message } from "./message";
 import { Observable} from "rxjs";
-import {EnvService} from "../env.service";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class MessageService{
   private messagesUrl: string;
   private sendto: string;
 
-  constructor(private http: HttpClient, private envserve: EnvService){
-    this.messagesUrl= envserve.apiUrl + "/messages";
+  constructor(private http: HttpClient){
+    this.messagesUrl= environment.apiUrl + "/messages";
   }
 
   public save(message: Message){

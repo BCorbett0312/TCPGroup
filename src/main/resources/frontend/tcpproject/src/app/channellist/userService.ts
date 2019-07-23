@@ -2,9 +2,7 @@ import {Injectable} from "@angular/core";
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { User } from "../user";
 import { Observable} from "rxjs";
-import {EnvService} from "../env.service";
-
-
+import {environment} from "../../environments/environment";
 
 
 @Injectable()
@@ -14,8 +12,8 @@ export class UserService{
 
 
 
-  constructor(private http: HttpClient, private envserve: EnvService){
-    this.usersUrl= envserve.apiUrl + "/users";
+  constructor(private http: HttpClient){
+    this.usersUrl= environment.apiUrl + "/users";
   }
 
   public findAll(): Observable<User[]> {

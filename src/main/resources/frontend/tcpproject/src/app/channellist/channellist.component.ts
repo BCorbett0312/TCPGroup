@@ -5,6 +5,7 @@ import {User} from '../user';
 import {UserService} from "./userService";
 import {ChannelService} from "./channelService";
 
+
 @Component({
   selector: 'app-channellist',
   templateUrl: './channellist.component.html',
