@@ -1,5 +1,9 @@
 <table class="table table-fixed table-bordered table-striped" style="height:100%">
+
+ <!---------User logged In----------------->
+  <div *ngIf="userLoggedIn">
   <tr style="height:50%">
+
     <td>
       <h6>Channels</h6>
       <ul class="channels">
@@ -20,5 +24,31 @@
         </li>
       </ul>
     </td>
+
   </tr>
+  </div>
+
+
+
+
+  <!----------User Logged Out------------------>
+
+  <div *ngIf="userLoggedIn">
+    <tr style="height:50%">
+
+      <td>
+        <h6>Channels</h6>
+        <ul class="channels">
+          <li
+              [class.selected]="selectedChannel === selectedChannel">
+              <span class="badge">{{selectedChannel.name}}</span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </div>
+
+
+
+
 </table>
