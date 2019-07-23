@@ -4,6 +4,6 @@ body {
 
   background-image: url("https://wallpapershome.com/images/pages/pic_h/20310.jpg");
   background-repeat: no-repeat;
-  background-size: 1700px 900px;
+  background-attachment: fixed;
 
 }
