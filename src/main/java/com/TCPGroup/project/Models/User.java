@@ -24,6 +24,11 @@ public class User {
         authenticated = null;
     }
 
+    public User(Integer id) {
+        authenticated = null;
+        this.id=id;
+    }
+
     public String getPassword() {
         return password;
     }

@@ -6,6 +6,7 @@ spring:
         username: root
         password: password
         driver-class-name: com.mysql.cj.jdbc.Driver
+
     jpa:
        # open-in-view: false
         hibernate:
@@ -24,6 +25,7 @@ spring:
         username: b61809904eef7c
         password: bc4e0836
         driver-class-name: com.mysql.cj.jdbc.Driver
+
     jpa:
         hibernate:
             ddl-auto: validate # update #

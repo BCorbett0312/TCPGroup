@@ -19,4 +19,12 @@ export class ChannelService{
     return this.http.get<Channel[]>(this.channelsUrl);
   }
 
+  public findChannelsByUser(userId:number){
+    return this.http.get<Channel[]>(this.envserv.apiUrl +"/users/"+userId+"/channels");
+  }
+
+  public getAllStandardChannels(){
+    return this.http.get<Channel[]>(this.channelsUrl+"/standard")
+  }
+
 }

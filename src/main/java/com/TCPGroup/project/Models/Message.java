@@ -12,8 +12,8 @@ public class Message {
     @OneToOne
     private User user;
 
-    @OneToOne
-    private Channel channel;
+//    @OneToOne
+    private Integer channelId;
 
     private String body;
 
@@ -39,12 +39,12 @@ public class Message {
         this.fromUsername= user.getUsername();
     }
 
-    public Integer getChannel() {
-        return channel.getId();
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setChannel(Channel channel) {
-        this.channel = channel;
+    public void setChannelId(Integer channel) {
+        this.channelId = channel;
     }
 
     public String getBody() {

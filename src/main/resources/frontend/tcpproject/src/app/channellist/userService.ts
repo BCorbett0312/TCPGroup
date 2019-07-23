@@ -5,8 +5,6 @@ import { Observable} from "rxjs";
 import {EnvService} from "../env.service";
 
 
-
-
 @Injectable()
 export class UserService{
   private usersUrl: string;
@@ -34,8 +32,5 @@ export class UserService{
     return t;
 
   }
-
-
-
 
 }

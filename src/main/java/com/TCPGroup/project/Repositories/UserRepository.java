@@ -17,7 +17,7 @@ public interface UserRepository  extends JpaRepository<User, Integer> {
 
     List<User> findAllByIdIn(List<Integer> ids);
 
-    @Query(value = "SELECT * FROM heroku_884cbef5c97b2c4.user t where t.username = :username and t.password = :password",
-            nativeQuery = true)
+    //findAllByUsernameAndPassword
+    @Query(value = "SELECT * FROM user t where t.username = :username and t.password = :password",nativeQuery = true)
     User authenticateUser(@Param("username") String username, @Param("password") String passwordToCheck);
 }

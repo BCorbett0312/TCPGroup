@@ -1,6 +1,9 @@
+import { Subscription } from "./subscription";
+
 export class Channel {
   id: number;
   name: string;
+  subscriptions: Subscription[];
 
   selectedChannel: number;
 
