@@ -32,9 +32,10 @@ export class ChannellistComponent implements OnInit {
     this.updateSelectedItem();
   }
 
-  logIn(){
+  logIn(user: User){
     this.userLoggedIn = true;
     this.userService.findAll().subscribe(data => this.users = data)
+    this.findChannelsByUser(user)
  //   this.channelService.findAll().subscribe(data => this.channels = data)
  //   this.userService.getUserChannels(this.selectedUser).subscribe(data=>this.users = data);
   }
@@ -57,8 +58,8 @@ export class ChannellistComponent implements OnInit {
     this.selectedChannel = new Channel();
   }
 
-  findChannelsByUser(userid:number){
-    return this.channelService.findChannelsByUser(userid)
+  findChannelsByUser(user:User){
+    this.channelService.findChannelsByUser(user.id).subscribe(data => this.channels = data);
   }
 
 }

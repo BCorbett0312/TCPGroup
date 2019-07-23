@@ -33,4 +33,9 @@ public class SubscriptionController {
         return this.subscriptionService.createSubscription(newSubscription);
     }
 
+    @PostMapping("/subscriptions/list")
+    public List<Subscription> createNewSubscription(@RequestBody List<Subscription> subscriptions){
+        return this.subscriptionService.createSubscriptions(subscriptions);
+    }
+
 }

@@ -11,7 +11,6 @@ export class User{
   constructor() {
     this.password = null;
     this.authenticated = null;
-    this.subscriptions=null;
   }
 
 }

@@ -12,6 +12,7 @@ import {MessageService} from "./message-module/messageService";
 import {UserService} from "./channellist/userService";
 import {ChannelService} from "./channellist/channelService";
 import {EnvService} from "./env.service";
+import {SubscriptionService} from "./subscriptionService";
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import {EnvService} from "./env.service";
     HttpClientModule,
     FormsModule
   ],
-  providers: [MessageService,UserService,ChannelService, EnvService],
+  providers: [MessageService,UserService,ChannelService, EnvService, SubscriptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

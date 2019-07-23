@@ -30,4 +30,8 @@ public class SubscriptionService {
     public Subscription createSubscription(Subscription subscription){
         return this.subscriptionRepository.save(subscription);
     }
+
+    public List<Subscription> createSubscriptions(List<Subscription> subscriptions){
+        return this.subscriptionRepository.saveAll(subscriptions);
+    }
 }

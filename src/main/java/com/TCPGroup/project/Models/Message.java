@@ -9,8 +9,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    private User user;
+//    @OneToOne
+    private Integer userId;
 
 //    @OneToOne
     private Integer channelId;
@@ -30,13 +30,12 @@ public class Message {
         this.id = id;
     }
 
-    public Integer getUser() {
-        return user.getId();
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-        this.fromUsername= user.getUsername();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getChannelId() {

@@ -26,5 +26,9 @@ export class SubscriptionService {
     return  this.http.get<Subscription[]>(this.sendto);
   }
 
+  public createSubscriptions(subscriptions:Subscription[]){
+    return this.http.post(this.subscriptionUrl+"/list", subscriptions);
+  }
+
 }
 

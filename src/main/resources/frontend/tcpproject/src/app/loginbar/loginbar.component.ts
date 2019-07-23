@@ -1,9 +1,10 @@
-import {Component, ElementRef, EventEmitter, Injectable, OnInit, Output, ViewChild} from '@angular/core';
-import{ User} from "../user";
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {User} from "../user";
 import {UserService} from "../channellist/userService";
 import {ChannelService} from "../channellist/channelService";
 import {Channel} from "../channel";
 import {Subscription} from "../subscription";
+import {SubscriptionService} from "../subscriptionService";
 
 
 
@@ -26,7 +27,7 @@ export class LoginbarComponent implements OnInit {
   showNavBar: boolean;
   channels:Channel[];
 
-  constructor(private userService: UserService, private channelService: ChannelService) {
+  constructor(private userService: UserService, private channelService: ChannelService, private subscriptionService: SubscriptionService) {
     this.userToAuth = new User();
     this.userIsAuthenticated = false;
     this.newUserModal = false;
@@ -82,14 +83,15 @@ export class LoginbarComponent implements OnInit {
 
   async createNewUser(){
     console.log(this.userToAuth);
-    this.channelService.getAllStandardChannels().subscribe(data => this.channels = data)
-    this.channels.forEach((chans) => {this.userToAuth.subscriptions.push(new Subscription(this.userToAuth.id,chans.id))});
     this.userService.createNewUser(this.userToAuth);
     this.updateNewUserModal();
     this.clearField();
+    this.onLogin();
   }
 
-
-
-
+  addDefaultChannelsToNewUser(user:User){
+    this.channelService.getAllStandardChannels().subscribe(data => this.channels = data);
+    this.channels.forEach(chans => {user.subscriptions.push(new Subscription(user.id,chans.id))});
+    this.subscriptionService.createSubscriptions(user.subscriptions);
+  }
 }
