@@ -4,7 +4,7 @@
 }
 .channels {
   flex-basis: 30%;
-  background-color: cornflowerblue;
+  background-color: darkslategray;
   color:#fff;
   padding: 5px 20px;
   /*margin: 0 0 2em 0;*/
@@ -40,7 +40,10 @@
   background-color: #DDD;
   left: .1em;
 }
-.channels .text {
+
+
+.channels .badge {
+
    position: relative;
    top: -3px;
    font-size: 16px;
@@ -48,10 +51,11 @@
  }
 
 .badge {
+
   display: inline-block;
   width: 15px;
   height: 20px;
-  background-color: cornflowerblue;
+  /*background-color: cornflowerblue;*/
   margin-right: 200px;
   border-radius: 70%;
   /*display: inline-block;*/
@@ -66,6 +70,11 @@
   /*height: 1.8em;*/
   /*margin-right: .8em;*/
   /*border-radius: 4px 0 0 4px;*/
+}
+
+h6{
+  color:white;
+  font-size: 25px;
 }
 
 
