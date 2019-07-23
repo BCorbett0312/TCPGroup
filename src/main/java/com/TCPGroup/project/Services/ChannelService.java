@@ -11,9 +11,10 @@ import java.util.List;
 @Service
 public class ChannelService {
 
-    @Autowired
-    ChannelRepository channelRepository;
 
+    private ChannelRepository channelRepository;
+
+    @Autowired
     public ChannelService(ChannelRepository channelRepository){
         this.channelRepository=channelRepository;
 

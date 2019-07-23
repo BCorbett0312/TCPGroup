@@ -15,9 +15,10 @@ import java.util.List;
 @CrossOrigin
 public class ChannelController {
 
-    @Autowired
-    ChannelService channelService;
 
+    private ChannelService channelService;
+
+    @Autowired
     public ChannelController(ChannelService channelService) {
         this.channelService = channelService;
     }

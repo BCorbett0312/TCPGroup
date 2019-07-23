@@ -13,22 +13,21 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    @Autowired
+
     private MessageRepository messageRepository;
 
-    List<Message> messageList;
-    Comparator<Message> compareById = Comparator.comparing(Message::getId);
 
 
-    MessageService(MessageRepository messageRepository){
+    @Autowired
+    public MessageService(MessageRepository messageRepository){
         this.messageRepository=messageRepository;
     }
 
     public List<Message> getMessageByChannel(Integer toChannelId){
+        List<Message> messageList;
+        Comparator<Message> compareById = Comparator.comparing(Message::getId);
         messageList = messageRepository.getMessagesByToChannelId(toChannelId);
-
         Collections.sort(messageList, compareById.reversed());
-
         return messageList;
     }
 
