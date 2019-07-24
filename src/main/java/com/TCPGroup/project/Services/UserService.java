@@ -26,8 +26,8 @@ public class UserService {
         return this.userRepository.getById(id);
     }
 
-    public User authenticateUser(String userName, String password) {
-        return userRepository.authenticateUser(userName, password);
+    public User authenticateUser(User userToAuthenticate) {
+        return userRepository.findByUsernameAndPassword(userToAuthenticate.getUsername(), userToAuthenticate.getPassword());
     }
 
     public User createUser(User user){
