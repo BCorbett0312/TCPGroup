@@ -13,6 +13,7 @@ public interface UserRepository  extends JpaRepository<User, Integer> {
 
 
     User getById(Integer id);
+    User findByUsernameAndPassword(String username, String password);
 
 
     @Query(value = "SELECT * FROM heroku_884cbef5c97b2c4.user t where t.username = :username and t.password = :password",
