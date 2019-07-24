@@ -1,16 +1,12 @@
-
-import {Input} from "@angular/core";
-import {User} from "./user";
-
-export class Message{
+export class Message {
   id: number;
   fromUserId: number;
-  @Input() toChannelId;
+  private toChannelId: number;
   body: string;
   fromUsername: string;
 
 
-  constructor(){
+  constructor() {
 
     this.fromUserId = 2;
     this.fromUsername = "corby";
@@ -18,13 +14,7 @@ export class Message{
   }
 
 
-  updateChannel(channelId: number){
-    this.toChannelId=channelId;
+  set channelId(value: number) {
+    this.toChannelId = value;
   }
-
-  updateFrom(user:User){
-    this.fromUsername = user.username;
-    this.fromUserId = user.id;
-  }
-
 }

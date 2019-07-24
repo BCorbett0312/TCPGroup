@@ -1,23 +1,35 @@
 import {Injectable} from "@angular/core";
 import { HttpClient} from "@angular/common/http";
 import { Channel } from "../models/channel";
-import { Observable} from "rxjs";
-
 import {environment} from "../../environments/environment";
+
+
 
 @Injectable()
 export class ChannelService{
-  private channelsUrl: string;
-  sendto: string;
+
+  channels: Channel[];
+  channelsUrl: string;
+  selectedChannel: Channel;
+
+
 
   constructor(private http: HttpClient){
     this.channelsUrl= environment.apiUrl + "/channels";
   }
 
-  public findAll(): Observable<Channel[]> {
+  async findAll() {
+    await this.http.get<Channel[]>(this.channelsUrl).subscribe(data => this.channels = data);
 
-    // this.sendto = this.channelsUrl + ;
-    return this.http.get<Channel[]>(this.channelsUrl);
+
+  }
+
+  getChannels(){
+    return this.channels;
+  }
+
+  getSelectedChannel(){
+    return this.selectedChannel;
   }
 
 }
