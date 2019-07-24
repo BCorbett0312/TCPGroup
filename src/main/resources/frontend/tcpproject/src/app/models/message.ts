@@ -1,6 +1,6 @@
 
 import {Input} from "@angular/core";
-import {User} from "../user";
+import {User} from "./user";
 
 export class Message{
   id: number;

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { Channel} from '../channel';
-import {User} from '../user';
+import { Channel} from '../models/channel';
+import {User} from '../models/user';
 
-import {UserService} from "./userService";
-import {ChannelService} from "./channelService";
+import {UserService} from "../services/userService";
+import {ChannelService} from "../services/channelService";
 
 
 @Component({

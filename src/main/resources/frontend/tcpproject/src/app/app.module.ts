@@ -8,9 +8,9 @@ import { MessageComposeComponent } from './message-module/message-compose/messag
 import { AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {MessageService} from "./message-module/messageService";
-import {UserService} from "./channellist/userService";
-import {ChannelService} from "./channellist/channelService";
+import {MessageService} from "./services/messageService";
+import {UserService} from "./services/userService";
+import {ChannelService} from "./services/channelService";
 
 
 

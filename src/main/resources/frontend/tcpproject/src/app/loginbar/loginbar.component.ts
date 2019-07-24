@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Injectable, OnInit, Output, ViewChild} from '@angular/core';
-import{ User} from "../user";
-import {UserService} from "../channellist/userService";
+import{ User} from "../models/user";
+import {UserService} from "../services/userService";
 
 
 
