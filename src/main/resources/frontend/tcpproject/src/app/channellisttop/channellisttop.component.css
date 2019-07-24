@@ -44,11 +44,11 @@
 
 .channels .badge {
 
-   position: relative;
-   top: -3px;
-   font-size: 16px;
-   align-items: center;
- }
+  position: relative;
+  top: -3px;
+  font-size: 16px;
+  align-items: center;
+}
 
 .badge {
 
@@ -73,7 +73,7 @@
 }
 
 h6{
-  color:white;
+  color:black;
   font-size: 25px;
 }
 
