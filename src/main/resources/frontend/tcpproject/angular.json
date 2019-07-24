@@ -36,6 +36,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -52,7 +53,17 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "dev" : {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
+
+
           }
         },
         "serve": {
@@ -61,6 +72,9 @@
             "browserTarget": "tcpproject:build"
           },
           "configurations": {
+            "dev": {
+              "browserTarget": "tcpproject:build:dev"
+            },
             "production": {
               "browserTarget": "tcpproject:build:production"
             }

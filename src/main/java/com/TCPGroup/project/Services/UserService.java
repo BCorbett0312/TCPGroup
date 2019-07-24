@@ -10,10 +10,10 @@ import java.util.List;
 @Service
 public class UserService {
 
+
+    private UserRepository userRepository;
+
     @Autowired
-    UserRepository userRepository;
-
-
     public UserService(UserRepository userRepository) {
         this.userRepository=userRepository;
     }
@@ -26,12 +26,11 @@ public class UserService {
         return this.userRepository.getById(id);
     }
 
-    public User authenticateUser(String userName, String password) {
-        return userRepository.authenticateUser(userName, password);
+    public User authenticateUser(User userToAuthenticate) {
+        return userRepository.findByUsernameAndPassword(userToAuthenticate.getUsername(), userToAuthenticate.getPassword());
     }
 
     public User createUser(User user){
-        System.out.println(user);
         return userRepository.save(user);
     }
 

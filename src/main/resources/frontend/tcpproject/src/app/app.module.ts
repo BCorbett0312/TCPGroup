@@ -8,10 +8,10 @@ import { MessageComposeComponent } from './message-module/message-compose/messag
 import { AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {MessageService} from "./message-module/messageService";
-import {UserService} from "./channellist/userService";
-import {ChannelService} from "./channellist/channelService";
-import {EnvService} from "./env.service";
+import {MessageService} from "./services/messageService";
+import {UserService} from "./services/userService";
+import {ChannelService} from "./services/channelService";
+
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import {EnvService} from "./env.service";
     HttpClientModule,
     FormsModule
   ],
-  providers: [MessageService,UserService,ChannelService, EnvService],
+  providers: [MessageService,UserService,ChannelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable} from '@angular/core';
 import { ActivatedRoute, Router} from "@angular/router";
-import { MessageService} from "../messageService";
-import {Message} from "../message";
-import {User} from "../../user";
+import { MessageService} from "../../services/messageService";
+import {Message} from "../../models/message";
+import {User} from "../../models/user";
 
 
 @Component({

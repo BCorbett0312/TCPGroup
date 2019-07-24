@@ -1,16 +1,17 @@
 import {Injectable} from "@angular/core";
 import { HttpClient} from "@angular/common/http";
-import { Channel } from "../channel";
+import { Channel } from "../models/channel";
 import { Observable} from "rxjs";
-import {EnvService} from "../env.service";
+
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class ChannelService{
   private channelsUrl: string;
   sendto: string;
 
-  constructor(private http: HttpClient, private envserv: EnvService){
-    this.channelsUrl= envserv.apiUrl + "/channels";
+  constructor(private http: HttpClient){
+    this.channelsUrl= environment.apiUrl + "/channels";
   }
 
   public findAll(): Observable<Channel[]> {

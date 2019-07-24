@@ -7,13 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class Channel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String name;
     private boolean direct;
 
-    public Channel(){
+    public Channel() {
 
     }
 

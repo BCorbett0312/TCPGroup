@@ -11,10 +11,11 @@ import java.util.List;
 @CrossOrigin
 public class MessageController {
 
-    @Autowired
+
     private MessageService messageService;
 
-    MessageController(MessageService messageService){
+    @Autowired
+    public MessageController(MessageService messageService){
         this.messageService=messageService;
     }
 
