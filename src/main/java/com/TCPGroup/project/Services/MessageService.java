@@ -24,12 +24,13 @@ public class MessageService {
     @Autowired
     public MessageService(MessageRepository messageRepository, UserService userService){
         this.messageRepository=messageRepository;
+        this.userService=userService;
     }
 
     public List<Message> getMessageByChannel(Integer toChannelId){
         List<Message> messageList;
         Comparator<Message> compareById = Comparator.comparing(Message::getId);
-        messageList = messageRepository.getMessagesByToChannelId(toChannelId);
+        messageList = messageRepository.getMessagesByChannelId(toChannelId);
         for(Message message:messageList){
             message.setFromUsername(this.userService.getById(message.getUserId()).getUsername());
         }

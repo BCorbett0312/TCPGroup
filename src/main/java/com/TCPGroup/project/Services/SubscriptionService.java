@@ -1,7 +1,5 @@
 package com.TCPGroup.project.Services;
 
-
-import com.TCPGroup.project.Models.Channel;
 import com.TCPGroup.project.Models.Subscription;
 import com.TCPGroup.project.Repositories.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,9 @@ import java.util.List;
 @Service
 public class SubscriptionService {
 
-    @Autowired
-    SubscriptionRepository subscriptionRepository;
+    private SubscriptionRepository subscriptionRepository;
 
+    @Autowired
     SubscriptionService(SubscriptionRepository subscriptionRepository){
         this.subscriptionRepository=subscriptionRepository;
     }

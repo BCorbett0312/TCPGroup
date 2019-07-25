@@ -17,11 +17,11 @@ public class ChannelService {
 
     private ChannelRepository channelRepository;
     private SubscriptionService subscriptionService;
-    private UserService userService;
 
     @Autowired
-    public ChannelService(ChannelRepository channelRepository, SubscriptionService subscriptionService, UserService userService;){
+    public ChannelService(ChannelRepository channelRepository, SubscriptionService subscriptionService){
         this.channelRepository=channelRepository;
+        this.subscriptionService=subscriptionService;
     }
 
     public List<Channel> getAllChannels(){
@@ -32,18 +32,12 @@ public class ChannelService {
         return channelRepository.getById(id);
     }
 
-//    public List<User> getUsersByChannelId(Integer channelId){
+//    public List<User> getUsersByChannelId(Integer updateChannelId){
 //        List<User> users = new ArrayList<>();
-//        List<Subscription> subs = this.subscriptionService.getSubscriptionsByChannelId(channelId);
+//        List<Subscription> subs = this.subscriptionService.getSubscriptionsByChannelId(updateChannelId);
 //        for(Subscription sub:subs) users.add(sub.getUser());
 //        return users;
 //    }
-    public List<Integer> getUserIdsByChannelId(Integer channelId){
-        List<Integer> userIds = new ArrayList<>();
-        List<Subscription> subs = this.subscriptionService.getSubscriptionsByChannelId(channelId);
-        for(Subscription sub:subs) userIds.add(sub.getUserId());
-        return userIds;
-    }
 
     public Channel createChannel(Channel channel){
         System.out.println(channel);
@@ -58,7 +52,14 @@ public class ChannelService {
         return this.channelRepository.findAllByIdIn(ids);
     }
 
-    public List<User> getUsersByChannelId(Integer channelId){
-        return this.userService.getUsersByIds(this.getUserIdsByChannelId(channelId));
+    public List<Integer> getChannelIdsByUserId(Integer userId){
+        List<Integer> channelIds = new ArrayList<>();
+        List<Subscription> subs = this.subscriptionService.getSubscriptionsByUserId(userId);
+        for(Subscription sub:subs) channelIds.add(sub.getChannelId());
+        return channelIds;
+    }
+
+    public List<Channel> getChannelsByUserId(Integer userId){
+        return this.getChannelsByIds(this.getChannelIdsByUserId(userId));
     }
 }

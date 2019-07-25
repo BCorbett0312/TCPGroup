@@ -11,9 +11,9 @@ import java.util.List;
 @CrossOrigin
 public class SubscriptionController {
 
-    @Autowired
-    SubscriptionService subscriptionService;
+    private SubscriptionService subscriptionService;
 
+    @Autowired
     public SubscriptionController(SubscriptionService subscriptionService) {
         this.subscriptionService=subscriptionService;
     }

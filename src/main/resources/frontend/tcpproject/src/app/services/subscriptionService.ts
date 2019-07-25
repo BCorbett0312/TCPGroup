@@ -1,15 +1,16 @@
 import {Injectable} from "@angular/core";
 import { HttpClient, HttpHeaders} from "@angular/common/http";
-import { Subscription } from "./subscription";
-import {EnvService} from "./env.service";
+import { Subscription } from "../models/subscription";
+import {environment} from "../../environments/environment";
+//import {EnvService} from "./env.service";
 
 @Injectable()
 export class SubscriptionService {
   private subscriptionUrl: string;
   private sendto: string;
 
-  constructor(private http: HttpClient, private envserv: EnvService) {
-    this.subscriptionUrl = envserv.apiUrl + "/subscriptions";
+  constructor(private http: HttpClient) {
+    this.subscriptionUrl = environment.apiUrl + "/subscriptions";
   }
 
   public save(subscription: Subscription) {
@@ -17,12 +18,12 @@ export class SubscriptionService {
   }
 
   public findByUserId(userId:number){
-    this.sendto = this.envserv.apiUrl +"/users/" + userId + "/subscriptions";
+    this.sendto = environment.apiUrl +"/users/" + userId + "/subscriptions";
     return this.http.get<Subscription[]>(this.sendto);
   }
 
   public findByChannelId(channelId:number){
-    this.sendto = this.envserv.apiUrl +"/channels/" + channelId + "/subscriptions";
+    this.sendto = environment.apiUrl +"/channels/" + channelId + "/subscriptions";
     return  this.http.get<Subscription[]>(this.sendto);
   }
 

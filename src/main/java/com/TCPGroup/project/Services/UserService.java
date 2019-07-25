@@ -15,11 +15,11 @@ public class UserService {
 
     private UserRepository userRepository;
     private SubscriptionService subscriptionService;
-    private ChannelService channelService;
 
     @Autowired
-    public UserService(UserRepository userRepository, SubscriptionService subscriptionService, ChannelService channelService) {
+    public UserService(UserRepository userRepository, SubscriptionService subscriptionService) {
         this.userRepository=userRepository;
+        this.subscriptionService=subscriptionService;
     }
 
     public List<User> getAllUsers(){
@@ -38,18 +38,19 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<Integer> getChannelIdsByUserId(Integer userId){
-        List<Integer> channelIds = new ArrayList<>();
-        List<Subscription> subs = this.subscriptionService.getSubscriptionsByUserId(userId);
-        for(Subscription sub:subs) channelIds.add(sub.getChannelId());
-        return channelIds;
-    }
 
     public List<User> getUsersByIds(List<Integer> ids){
         return this.userRepository.findAllByIdIn(ids);
     }
 
-    public List<Channel> getChannelsByUserId(Integer userId){
-        return this.channelService.getChannelsByIds(this.getChannelIdsByUserId(userId));
+    public List<Integer> getUserIdsByChannelId(Integer channelId){
+        List<Integer> userIds = new ArrayList<>();
+        List<Subscription> subs = this.subscriptionService.getSubscriptionsByChannelId(channelId);
+        for(Subscription sub:subs) userIds.add(sub.getUserId());
+        return userIds;
+    }
+
+    public List<User> getUsersByChannelId(Integer channelId){
+        return this.getUsersByIds(this.getUserIdsByChannelId(channelId));
     }
 }

@@ -12,7 +12,7 @@ public class Channel {
     private boolean direct;
 
     //@OneToMany(fetch = FetchType.LAZY, mappedBy = "channel")
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "channelId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "updateChannelId")
     private List<Subscription> subscriptions;
 
     public Channel(){ }

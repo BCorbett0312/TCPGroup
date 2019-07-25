@@ -25,7 +25,6 @@ public class ChannelController {
     public List<Channel> getAllChannels() {
         return channelService.getAllChannels();
         //return new RensponseEntety
-
     }
 
     @GetMapping("/channels/{id}")
@@ -33,14 +32,15 @@ public class ChannelController {
         return channelService.getChannelById(id);
     }
 
-    @GetMapping("/channels/{id}/userids")
-    public List<Integer> getUserIdsByChannelId(@PathVariable Integer id){
-        return this.channelService.getUserIdsByChannelId(id);
+
+    @GetMapping("/users/{id}/channelids")
+    public List<Integer> getChannelIdsByUserId(@PathVariable Integer id){
+        return this.channelService.getChannelIdsByUserId(id);
     }
 
-    @GetMapping("/channels/{id}/users")
-    public List<User> getUsersByChannelId(@PathVariable Integer id){
-        return this.channelService.getUsersByChannelId(id);
+    @GetMapping("/users/{id}/channels")
+    public List<Channel> getChannelsByUserId(@PathVariable Integer id){
+        return this.channelService.getChannelsByUserId(id);
     }
 
     @PostMapping("/channels")
