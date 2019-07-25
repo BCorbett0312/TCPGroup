@@ -1,20 +1,20 @@
 export class Message {
   id: number;
-  fromUserId: number;
-  private toChannelId: number;
+  private userId: number;
+  private channelId: number;
   body: string;
   fromUsername: string;
 
 
   constructor() {
 
-    this.fromUserId = 2;
+    this.userId = 2;
     this.fromUsername = "corby";
-    this.toChannelId = 2;
+    this.updateChannelId = 2;
   }
 
 
-  set channelId(value: number) {
-    this.toChannelId = value;
+  set updateChannelId(value: number) {
+    this.channelId = value;
   }
 }
