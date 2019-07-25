@@ -1,87 +1,58 @@
-import {Component, ElementRef, EventEmitter, Injectable, OnInit, Output, ViewChild} from '@angular/core';
-import{ User} from "../user";
-import {UserService} from "../channellist/userService";
-
-
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {MessageService} from "../services/messageService";
+import {UserService} from "../services/userService";
+import {ChannelService} from "../services/channelService";
+import {User} from "../models/user";
 
 @Component({
   selector: 'app-loginbar',
   templateUrl: './loginbar.component.html',
   styleUrls: ['./loginbar.component.css']
 })
-
 export class LoginbarComponent implements OnInit {
 
-  userToAuth: User;
-  userIsAuthenticated: boolean;
-  userReturned: User;
-  @ViewChild("passwordField", { static: false }) passwordField: ElementRef;
-  @ViewChild("userNameField", { static: false }) userNameField: ElementRef;
-  @Output() updateMessageComponents = new EventEmitter();
-  @Output() userLogOut = new EventEmitter();
-  newUserModal: boolean;
-  showNavBar: boolean;
+  @ViewChild("createPasswordField", {static: false}) createPasswordField: ElementRef;
+  @ViewChild("createUserNameField", {static: false}) createUserNameField: ElementRef;
+  @ViewChild("loginPasswordField", {static: false}) loginPasswordField: ElementRef;
+  @ViewChild("loginUserNameField", {static: false}) loginUserNameField: ElementRef;
 
-  constructor(private userService: UserService) {
-    this.userToAuth = new User();
-    this.userIsAuthenticated = false;
-    this.newUserModal = false;
-    this.showNavBar = true;
 
+
+  constructor(messageService: MessageService, public userService: UserService, channelService: ChannelService) {
   }
 
   ngOnInit() {
   }
 
-
   async onLogin() {
-    await this.userService.authenticateUser(this.userToAuth).then(data => this.userReturned = data);
-    if(this.userReturned === null){
-    }else {this.userIsAuthenticated = true;}
-    this.clearField();
-    this.updateMessageComponents.emit();
-
+    await this.userService.authenticateUser();
+    if (this.userService.authenticatedUser === null) {
+    }
   }
 
-  async onLogOut(){
-    this.userToAuth = new User;
-    this.userReturned = null;
-    this.userIsAuthenticated = false;
-    this.userLogOut.emit();
-    // this.clearField();
-
+  onLogOut(){
+    this.userService.logOut();
   }
 
-  clearField(){
-    this.clearPassword();
-    this.clearUserName();
-
+  onCreateUser(){
+    this.userService.createNewUser().then().catch(this.userService.updateShowErrorCreatingUser);
+    this.clearCreateField();
   }
 
-  clearPassword(){
-    this.passwordField.nativeElement.value = '';
+  // clearField(){
+  //   this.loginPasswordField.nativeElement.value = '';
+  //   this.loginUserNameField.nativeElement.value = '';
+  //
+  // }
+
+  clearCreateField(){
+    this.createPasswordField.nativeElement.value = '';
+    this.createUserNameField.nativeElement.value = '';
   }
-
-  clearUserName(){
-    this.userNameField.nativeElement.value = '';
-  }
-
-  updateNewUserModal(){
-    if(this.newUserModal === false){
-      this.newUserModal = true;
-      this.showNavBar = false;
-    }else{this.newUserModal = false;
-      this.showNavBar=true;}
-  }
-
-  async createNewUser(){
-    console.log(this.userToAuth);
-    this.userService.createNewUser(this.userToAuth);
-    this.updateNewUserModal();
-    this.clearField();
-
-  }
-
-
-
+  //
+  // addDefaultChannelsToNewUser(user:User){
+  //   this.channelService.getAllStandardChannels().subscribe(data => this.channels = data);
+  //   this.channels.forEach(chans => {user.subscriptions.push(new Subscription(user.id,chans.id))});
+  //   this.subscriptionService.createSubscriptions(user.subscriptions);
+  // }
 }

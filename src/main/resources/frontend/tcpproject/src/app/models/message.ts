@@ -1,0 +1,20 @@
+export class Message {
+  id: number;
+  private userId: number;
+  private channelId: number;
+  body: string;
+  fromUsername: string;
+
+
+  constructor() {
+
+    this.userId = 2;
+    this.fromUsername = "corby";
+    this.updateChannelId = 2;
+  }
+
+
+  set updateChannelId(value: number) {
+    this.channelId = value;
+  }
+}

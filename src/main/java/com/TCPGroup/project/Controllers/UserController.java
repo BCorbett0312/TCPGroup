@@ -11,9 +11,10 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
 
-    @Autowired
-    UserService userService;
 
+    private UserService userService;
+
+    @Autowired
     public UserController(UserService userService) {
         this.userService=userService;
     }
@@ -28,9 +29,19 @@ public class UserController {
         return this.userService.getById(id);
     }
 
-    @PutMapping("/users/auth")
+    @PostMapping("/users/auth")
     public User authenticateUser(@RequestBody User userToAuthenticate) {
         return this.userService.authenticateUser(userToAuthenticate);
+    }
+
+    @GetMapping("/channels/{id}/userids")
+    public List<Integer> getUserIdsByChannelId(@PathVariable Integer id){
+        return this.userService.getUserIdsByChannelId(id);
+    }
+
+    @GetMapping("/channels/{id}/users")
+    public List<User> getUsersByChannelId(@PathVariable Integer id){
+        return this.userService.getUsersByChannelId(id);
     }
 
     @PostMapping("/users")

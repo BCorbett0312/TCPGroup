@@ -1,9 +1,7 @@
 package com.TCPGroup.project.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Channel {
@@ -13,10 +11,11 @@ public class Channel {
     private String name;
     private boolean direct;
 
-    public Channel(){
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "channel")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "updateChannelId")
+    private List<Subscription> subscriptions;
 
-    }
-
+    public Channel(){ }
 
     public Integer getId() {
         return id;
@@ -41,4 +40,8 @@ public class Channel {
     public void setDirect(boolean direct) {
         this.direct = direct;
     }
+
+    public List<Subscription> getSubscriptions() { return subscriptions; }
+
+    public void setSubscriptions(List<Subscription> subscriptions) { this.subscriptions = subscriptions; }
 }

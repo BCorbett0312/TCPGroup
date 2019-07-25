@@ -13,15 +13,18 @@ public class CloudDbProfile {
     private static final String USER_NAME = System.getenv("CLOUD_DB_UN");
     private static final String PASSWORD = System.getenv("CLOUD_DB_PW");
     private static final String URL = System.getenv("CLOUD_DB_URL");
+   // private static final String SCHEMA = System.getenv("CLOUD_DB_SCHEMA");
 
     @Bean
     public DataSource dataSource() {
+
 
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setUsername(USER_NAME);
         hikariConfig.setPassword(PASSWORD);
         hikariConfig.setJdbcUrl(URL);
         hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+      //  hikariConfig.setSchema(SCHEMA);
 
         return new HikariDataSource(hikariConfig);
     }
