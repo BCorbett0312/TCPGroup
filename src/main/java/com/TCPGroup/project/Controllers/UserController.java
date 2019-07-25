@@ -29,9 +29,9 @@ public class UserController {
         return this.userService.getById(id);
     }
 
-    @GetMapping("/users/auth/{username}/{password}")
-    public User authenticateUser(@PathVariable String password, @PathVariable String username) {
-        return this.userService.authenticateUser(username, password);
+    @PostMapping("/users/auth")
+    public User authenticateUser(@RequestBody User userToAuthenticate) {
+        return this.userService.authenticateUser(userToAuthenticate);
     }
 
     @PostMapping("/users")

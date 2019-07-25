@@ -1,38 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginbarComponent } from './loginbar/loginbar.component';
-import { ChannellistComponent } from './channellist/channellist.component';
-import { MessageListComponent } from './message-module/message-list/message-list.component';
-import { MessageComposeComponent } from './message-module/message-compose/message-compose.component';
-import { AppRoutingModule} from "./app-routing.module";
+import { MessageComposeComponent } from './message-compose/message-compose.component';
+import { MessageListComponent } from './message-list/message-list.component';
+import {MessageService} from "./services/messageService";
+import {ChannelService} from "./services/channelService";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import {MessageService} from "./message-module/messageService";
-import {UserService} from "./channellist/userService";
-import {ChannelService} from "./channellist/channelService";
-
-
+import { ChannellisttopComponent } from './channellisttop/channellisttop.component';
+import { UserlistComponent } from './userlist/userlist.component';
+import { LoginbarComponent } from './loginbar/loginbar.component';
+import {UserService} from "./services/userService";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginbarComponent,
-    ChannellistComponent,
-    MessageListComponent,
-    LoginbarComponent,
     MessageComposeComponent,
-
-
+    MessageListComponent,
+    ChannellisttopComponent,
+    UserlistComponent,
+    LoginbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [MessageService,UserService,ChannelService],
+  providers: [MessageService, ChannelService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
