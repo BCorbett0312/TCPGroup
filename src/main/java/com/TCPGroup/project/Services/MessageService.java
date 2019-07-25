@@ -14,27 +14,26 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    @Autowired
     private MessageRepository messageRepository;
-
-    @Autowired
     private UserService userService;
 
     List<Message> messageList;
     Comparator<Message> compareById = Comparator.comparing(Message::getId);
 
 
-    MessageService(MessageRepository messageRepository){
+    @Autowired
+    public MessageService(MessageRepository messageRepository, UserService userService){
         this.messageRepository=messageRepository;
     }
 
     public List<Message> getMessageByChannel(Integer toChannelId){
-        messageList = messageRepository.getMessagesByChannelId(toChannelId);
+        List<Message> messageList;
+        Comparator<Message> compareById = Comparator.comparing(Message::getId);
+        messageList = messageRepository.getMessagesByToChannelId(toChannelId);
         for(Message message:messageList){
             message.setFromUsername(this.userService.getById(message.getUserId()).getUsername());
         }
         Collections.sort(messageList, compareById.reversed());
-
         return messageList;
     }
 

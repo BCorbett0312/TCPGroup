@@ -13,16 +13,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private SubscriptionService subscriptionService;
+    private ChannelService channelService;
 
     @Autowired
-    SubscriptionService subscriptionService;
-
-    @Autowired
-    ChannelService channelService;
-
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SubscriptionService subscriptionService, ChannelService channelService) {
         this.userRepository=userRepository;
     }
 
@@ -34,12 +30,11 @@ public class UserService {
         return this.userRepository.getById(id);
     }
 
-    public User authenticateUser(String userName, String password) {
-        return userRepository.authenticateUser(userName, password);
+    public User authenticateUser(User userToAuthenticate) {
+        return userRepository.findByUsernameAndPassword(userToAuthenticate.getUsername(), userToAuthenticate.getPassword());
     }
 
     public User createUser(User user){
-        System.out.println(user);
         return userRepository.save(user);
     }
 

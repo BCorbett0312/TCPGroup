@@ -2,9 +2,9 @@
 spring:
     profiles: local
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/tcpproj?reconnect=true
+        url: jdbc:mysql://127.0.0.1:3306/tcpproj?reconnect=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
-        password: password
+        password: secretpassword
         driver-class-name: com.mysql.cj.jdbc.Driver
 
     jpa:

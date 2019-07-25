@@ -11,23 +11,25 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class
-ChannelController {
+public class ChannelController {
+
+
+    private ChannelService channelService;
 
     @Autowired
-    ChannelService channelService;
-
-    public ChannelController(ChannelService channelService){
+    public ChannelController(ChannelService channelService) {
         this.channelService = channelService;
     }
 
     @GetMapping("/channels")
-    public List<Channel> getAllChannels(){
+    public List<Channel> getAllChannels() {
         return channelService.getAllChannels();
+        //return new RensponseEntety
+
     }
 
     @GetMapping("/channels/{id}")
-    public Channel getChannelById(@PathVariable Integer id){
+    public Channel getChannelById(@PathVariable Integer id) {
         return channelService.getChannelById(id);
     }
 

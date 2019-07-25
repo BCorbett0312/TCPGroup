@@ -13,16 +13,14 @@ import java.util.List;
 
 @Service
 public class ChannelService {
-    @Autowired
-    ChannelRepository channelRepository;
+
+
+    private ChannelRepository channelRepository;
+    private SubscriptionService subscriptionService;
+    private UserService userService;
 
     @Autowired
-    SubscriptionService subscriptionService;
-
-    @Autowired
-    UserService userService;
-
-    public ChannelService(ChannelRepository channelRepository){
+    public ChannelService(ChannelRepository channelRepository, SubscriptionService subscriptionService, UserService userService;){
         this.channelRepository=channelRepository;
     }
 
