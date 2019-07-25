@@ -10,7 +10,7 @@ export class Message {
 
     this.userId = 2;
     this.fromUsername = "corby";
-    this.updateChannelId = 2;
+    this.channelId = 2;
   }
 
 
