@@ -32,9 +32,9 @@ public class ChannelService {
         return channelRepository.getById(id);
     }
 
-//    public List<User> getUsersByChannelId(Integer updateChannelId){
+//    public List<User> getUsersByChannelId(Integer setChannelId){
 //        List<User> users = new ArrayList<>();
-//        List<Subscription> subs = this.subscriptionService.getSubscriptionsByChannelId(updateChannelId);
+//        List<Subscription> subs = this.subscriptionService.getSubscriptionsByChannelId(setChannelId);
 //        for(Subscription sub:subs) users.add(sub.getUser());
 //        return users;
 //    }

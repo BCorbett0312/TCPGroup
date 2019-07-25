@@ -41,7 +41,6 @@ public class Subscription {
         return channelId;
     }
 
-    public void setChannelId(Integer channelId) {
-        this.channelId = channelId;
+    public void setChannelId(Integer channelId) {this.channelId = channelId;
     }
 }
