@@ -4,7 +4,7 @@ export class EnvService {
   // be overridden by env.js
 
   // API url
-  public apiUrl = 'https://teamac.herokuapp.com'; // 'http://localhost:8080'; //
+  public apiUrl = 'http://localhost:8080'; // 'https://teamac.herokuapp.com'; //
 
   // Whether or not to enable debug mode
   public enableDebug = true;
