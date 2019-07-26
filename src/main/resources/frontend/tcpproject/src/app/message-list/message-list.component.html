@@ -1,0 +1,16 @@
+<div class="container" id="messagelist" style="float: right; width: 70%">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">From</th>
+      <th scope="col">Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let message of messageService.getMessages()">
+      <td>{{ message.fromUsername }}</td>
+      <td>{{ message.body}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

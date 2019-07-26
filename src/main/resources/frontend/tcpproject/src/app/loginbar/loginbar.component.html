@@ -1,73 +1,79 @@
+<nav *ngIf="userService.showNavBar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Team A & C Communications</a>
+    <ul class="nav navbar-nav">
 
-<nav *ngIf="showNavBar"  class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
-  <div class="d-flex flex-grow-1">
-    <span class="w-50 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
-    <a class="navbar-brand" href="#">
-      Welcome to Team A & C Communications
-    </a>
-    <div class="w-50 text-right">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
-  <!--------------Right Side of Bar ------------>
-  <div *ngIf="userIsAuthenticated === false"  class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
-    <ul class="navbar-nav ml-auto flex-nowrap">
-      <li class="nav-item">
-        <form class="form-inline my-2 my-md-0 userNameForm">
-          <input #userNameField class="userName-Field" id="userUserName" class="form-control" type="text" placeholder="User Name" [(ngModel)]="userToAuth.username" name="username">
-          <a class="clear" (click)="userToAuth.username">
-            <span class="glyphicon glyphicon-remove"></span>
-          </a>
-        </form>
-      </li>
-      <li class="nav-item">
-        <form class="form-inline my-2 my-md-0 passwordForm">
-          <input #passwordField class ="password-field" id="userPasswordBox" class="form-control" type="text" placeholder="Password" [(ngModel)]="userToAuth.password" name="password">
-          <a class="clear" (click)="userToAuth.password=null">
-            <span class="glyphicon glyphicon-remove"></span>
-          </a>
-        </form>
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-outline-success my-2 my-sm-0" type = "button" (click)="onLogin(); clearField()">Login</button>
-        <button class="btn btn-outline-success my-2 my-sm-0 newUserButton" type="submit" (click)="updateNewUserModal()">New User</button>
-      </li>
-    </ul>
-  </div>
+      <!--------------Shows If User is Not logged in--------->
+      <div *ngIf="!userService.userIsAuthenticated">
+        <button class="btn btn-outline-light my-2 my-sm-0" type = "button" (click)="userService.updateLoginUserModal()">Login</button>
+        <button class="btn btn-outline-light my-2 my-sm-0 newUserButton" type="submit" (click)="userService.updateNewUserModal()">New User</button>
+      </div>
 
-
-
-
-  <!--Navbar After Login-------------->
-
-  <div  *ngIf="userIsAuthenticated === true">
-    <ul class = "navbar-nav ml-auto flex-nowrap">
-      <li>
+      <!------------Shows if User is Logged in----------->
+      <div *ngIf="userService.userIsAuthenticated">
         <a class="navbar-brand navbar-right" href="#">
-          Welcome {{userReturned.username}}
+          Welcome {{userService.authenticatedUser.username}}
         </a>
-      </li>
-      <li>
-        <button class="btn btn-outline-success my-2 my-sm-0" type = "button" (click)="onLogOut()">Log Out</button>
-      </li>
-     </ul>
+        <button class="btn btn-outline-light my-2 my-sm-0 logOutButton" type="submit" (click)="onLogOut()">Log Out</button>
+      </div>
+
+    </ul>
   </div>
 </nav>
 
 
 
+<!-------Error Creating User------------>
+<!--<div id="ErrorCreatingUser" class="modal" *ngIf="userService.showErrorCreatingUser">-->
+<!--  <div class="modal-content">-->
+<!--    <h2>There was an error creating the user.  Please try again.</h2>-->
+<!--    <button class="btn btn-outline-success my-2 my-sm-0" id="closeErrorModal" type="submit"  (click)= "userService.updateShowErrorCreatingUser()">Close</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
 <!--CREATE USER MODAL-->
 
-<div id="CreateUserModal" class="modal" *ngIf="newUserModal">
+<div id="CreateUserModal" class="modal" *ngIf="userService.newUserModal">
   <div class="modal-content">
-    <h2>Sign Up</h2>
-    <input class="form-control mr-sm-2 loginField" type="search"  placeholder="Username" [(ngModel)]="userToAuth.username">
-    <input class="form-control mr-sm-2 loginField" type="search" placeholder="Password" [(ngModel)]="userToAuth.password">
-    <button class="btn btn-outline-success my-2 my-sm-0" id="submitCreateBtn" type="submit" (click)=createNewUser()>Submit</button>
-    <button class="btn btn-outline-danger my-2 my-sm-0" id="exitCreateBtn" type="submit" (click)=updateNewUserModal()>Exit</button>
+    <h2>Create New User</h2>
+    <input #createUserNameField class="form-control mr-sm-2 loginField" id="usernameForm" type="search"  placeholder="Username" [(ngModel)]="userService.userToCreate.username">
+    <a class="clear" (click)="userService.userToCreate.username=null">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <input #createPasswordField class="form-control mr-sm-2 loginField" id="passwordForm" type="search" placeholder="Password" [(ngModel)]="userService.userToCreate.password">
+    <a class="clear" (click)="userService.userToCreate.password=null">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <button class="btn btn-outline-success my-2 my-sm-0" id="submitCreateBtn" type="submit"  (click)= "onCreateUser()">Submit</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0" id="exitCreateBtn" type="submit" (click)=userService.updateNewUserModal()>Exit</button>
   </div>
-
 </div>
 
+
+
+<!--------LOGIN MODAL------->
+
+
+<div id="LoginUserModal" class="modal" *ngIf="userService.loginUserModal">
+  <div class="modal-content">
+    <h2>Login</h2>
+    <input #loginUserNameField class="form-control mr-sm-2 loginField" id="LoginusernameForm" type="search"  placeholder="Username" [(ngModel)]="userService.userToAuthenticate.username">
+    <a class="clear" (click)="userService.userToAuthenticate.username">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <input #loginPasswordField class="form-control mr-sm-2 loginField" id="LoginpasswordForm" type="search" placeholder="Password" [(ngModel)]="userService.userToAuthenticate.password">
+    <a class="clear" (click)="userService.userToAuthenticate.password=null">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <button class="btn btn-outline-success my-2 my-sm-0" id="submitLoginBtn" type="submit"  (click)= "onLogin()">Submit</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0" id="exitLoginBtn" type="submit" (click)=userService.updateLoginUserModal()>Exit</button>
+  </div>
+</div>
