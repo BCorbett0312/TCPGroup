@@ -9,7 +9,7 @@ export class Message {
   constructor() {
 
     this.userId = 2;
-    this.fromUsername = "corby";
+
     this.channelId = 2;
   }
 
@@ -17,5 +17,11 @@ export class Message {
   updateChannelId(value: number) {
     this.channelId = value;
   }
+
+  updateUserId(value: number){
+    this.userId = value;
+  }
+
+
 
 }

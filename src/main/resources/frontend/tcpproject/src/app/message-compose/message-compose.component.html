@@ -1,6 +1,6 @@
 <div  *ngIf="userService.userIsAuthenticated">
-  <div class="container" id="messageBox" style="float: right; width: 70%">
-    <div class="input-group" >
+
+    <div class="input-group" id="messageBox" style="float: right; width: 70%" >
       <input #messageField id="messageToClear" type="text" class="form-control" [(ngModel)]="message.body" name="messageBody" placeholder="Please enter a message to send."
              #body = "ngModel">
       <a class="clear" (click)="message.body=null">
@@ -10,5 +10,5 @@
         <button (click)="onSubmit()"  type="button" class="btn btn-dark">Send</button>
       </div>
     </div>
-  </div>
+
 </div>

@@ -1,16 +1,24 @@
-.passwordForm {
-  margin-right: 1em;
-}
+.loginField{
 
-.userNameForm{
-  margin-right: 1em;
+  margin-bottom: 1rem;
 }
 
 .newUserButton{
   margin-left: .5em;
 }
+
+.btn-outline-danger{
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+.btn-outline-success{
+  margin-right: 15px;
+}
+
 /* Modal Content*/
 .modal-content {
+  text-align: center;
   margin: auto;
   display: block;
   width: 80%;
