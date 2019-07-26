@@ -21,6 +21,7 @@ export class ChannellisttopComponent implements OnInit {
     this.channelService.findAll();
     this.userService.findAll();
 
+
   }
 
   onChannelSelect(channel: Channel): void{
