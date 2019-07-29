@@ -1,5 +1,6 @@
 package com.TCPGroup.project.Services;
 
+import com.TCPGroup.project.Models.Subscription;
 import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Repositories.UserRepository;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,6 +73,7 @@ public class UserServiceTest {
     public void getUserIdsByChannelId() {
         List<Integer> ids = Arrays.asList(1,2);
         when(userService.getUserIdsByChannelId(2)).thenReturn(ids);
+        when(subscriptionService.getSubscriptionsByChannelId(2)).thenReturn(subscriptionList());
         userService.getUserIdsByChannelId(2);
         verify(subscriptionService, times(1)).getSubscriptionsByChannelId(2);
     }
@@ -80,13 +83,22 @@ public class UserServiceTest {
         List<User> users = subData();
         List<Integer> ids = Arrays.asList(1,2);
         when(userService.getUsersByChannelId(2)).thenReturn(users);
+        when(subscriptionService.getSubscriptionsByChannelId(2)).thenReturn(subscriptionList());
         userService.getUsersByChannelId(2);
     //    verify(userRepository, times(1)).findAllByIdIn(ids);
-        verify(subscriptionService, times(1)).getSubscriptionsByChannelId(2);
+        verify(subscriptionService, times(2)).getSubscriptionsByChannelId(2);
     }
 
 
     private List<User> subData() {return Arrays.asList(new User(), new User());}
 
     private User createUserMock(){return new User();}
+
+    private List<Subscription> subscriptionList(){
+        Subscription sub1 = new Subscription();
+        sub1.setUserId(1);
+        Subscription sub2 = new Subscription();
+        sub2.setUserId(2);
+        return Arrays.asList(sub1,sub2);
+    }
 }
