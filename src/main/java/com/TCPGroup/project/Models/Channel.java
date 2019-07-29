@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class Channel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private boolean direct;
