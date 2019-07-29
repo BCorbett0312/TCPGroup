@@ -11,6 +11,7 @@ export class ChannelService{
   channels: Channel[];
   channelsUrl: string;
   selectedChannel: Channel;
+  sendto: string;
 
 
 
@@ -22,6 +23,11 @@ export class ChannelService{
     await this.http.get<Channel[]>(this.channelsUrl).subscribe(data => this.channels = data);
 
 
+  }
+
+  async findChannelsByUserId(userid:number){
+    this.sendto = environment.apiUrl + "/users/"+userid+"/channels";
+    await this.http.get<Channel[]>(this.sendto).subscribe(data => this.channels = data);
   }
 
   getChannels(){

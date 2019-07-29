@@ -18,15 +18,12 @@ export class UserService{
   //SelectedUser on List
   public selectedUser: User;
 
-
   // Booleans to switch modals
   public showErrorCreatingUser = false;
   public userIsAuthenticated = false;
   public showNavBar = true;
   public newUserModal = false;
   public loginUserModal = false;
-
-
 
   constructor(private http: HttpClient){
     this.usersUrl= environment.apiUrl + "/users";

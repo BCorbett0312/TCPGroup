@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class UserTest {
@@ -17,14 +20,26 @@ public class UserTest {
 
     @Test
     public void getPassword() {
+        this.user = new User();
+        String actual=this.user.getPassword();
+        Assert.assertNull(actual);
     }
 
     @Test
     public void setPassword() {
+        this.user = new User();
+        String expected="password";
+        this.user.setPassword(expected);
+        String actual = this.user.getPassword();
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void getId() {
+        Integer expected=2;
+       this.user = new User(expected);
+        Integer actual=this.user.getId();
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
@@ -63,6 +78,22 @@ public class UserTest {
         Boolean expected =false;
         this.user.setAuthenticated(expected);
         Boolean actual = this.user.getAuthenticated();
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getSubscriptionsNull() {
+        User user=new User();
+        List<Subscription> list = user.getSubscriptions();
+        Assert.assertNull(list);
+    }
+
+    @Test
+    public void setSubscriptions() {
+        List<Subscription> expected = Arrays.asList(new Subscription(),new Subscription());
+        User user = new User();
+        user.setSubscriptions(expected);
+        List<Subscription> actual = user.getSubscriptions();
         Assert.assertEquals(expected,actual);
     }
 }
