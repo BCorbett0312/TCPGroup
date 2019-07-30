@@ -19,7 +19,6 @@ export class LoginbarComponent implements OnInit {
 
 
   constructor(messageService: MessageService, public userService: UserService, channelService: ChannelService) {
-
   }
 
   ngOnInit() {
@@ -28,14 +27,11 @@ export class LoginbarComponent implements OnInit {
   async onLogin() {
     await this.userService.authenticateUser();
     if (this.userService.authenticatedUser === null) {
-
-
     }
   }
 
   onLogOut(){
     this.userService.logOut();
-
   }
 
   onCreateUser(){
@@ -53,7 +49,10 @@ export class LoginbarComponent implements OnInit {
     this.createPasswordField.nativeElement.value = '';
     this.createUserNameField.nativeElement.value = '';
   }
-
-
-
+  //
+  // addDefaultChannelsToNewUser(user:User){
+  //   this.channelService.getAllStandardChannels().subscribe(data => this.channels = data);
+  //   this.channels.forEach(chans => {user.subscriptions.push(new Subscription(user.id,chans.id))});
+  //   this.subscriptionService.createSubscriptions(user.subscriptions);
+  // }
 }
