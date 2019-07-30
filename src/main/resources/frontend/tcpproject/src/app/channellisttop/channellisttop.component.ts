@@ -13,13 +13,15 @@ export class ChannellisttopComponent implements OnInit {
 
 
 
-  constructor(public userService: UserService,
+  constructor(
+    public userService: UserService,
               public channelService: ChannelService,
               private messageService: MessageService) { }
 
   ngOnInit() {
     this.channelService.findAll();
     this.userService.findAll();
+
 
   }
 
