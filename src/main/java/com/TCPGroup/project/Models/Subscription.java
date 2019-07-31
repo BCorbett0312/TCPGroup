@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Subscription {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name="SUBSCRIPTION_ID")
     private Integer id;
 

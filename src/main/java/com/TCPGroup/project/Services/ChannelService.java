@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -61,5 +62,25 @@ public class ChannelService {
 
     public List<Channel> getChannelsByUserId(Integer userId){
         return this.getChannelsByIds(this.getChannelIdsByUserId(userId));
+    }
+
+    public Channel createDirectChannel(Integer id1, Integer id2){
+        Channel direct = new Channel();
+        direct.setDirect(true);
+
+        direct = this.channelRepository.save(direct);
+
+        Subscription sub1=new Subscription();
+        sub1.setUserId(id1);
+        sub1.setChannelId(direct.getId());
+        sub1 = this.subscriptionService.createSubscription(sub1);
+
+        Subscription sub2 = new Subscription();
+        sub2.setUserId(id2);
+        sub2.setChannelId(direct.getId());
+        sub2= this.subscriptionService.createSubscription(sub2);
+
+        direct.setSubscriptions(Arrays.asList(sub1, sub2));
+        return direct;
     }
 }
