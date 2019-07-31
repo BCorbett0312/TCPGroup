@@ -3,6 +3,7 @@ import {UserService} from "../services/userService";
 import {MessageService} from "../services/messageService";
 import {ChannelService} from "../services/channelService";
 import {User} from "../models/user";
+import {Channel} from "../models/channel";
 
 @Component({
   selector: 'app-userlist',
@@ -22,8 +23,9 @@ export class UserlistComponent implements OnInit {
   }
 
   onUserSelect(user: User): void{
-    this.channelService.selectedChannel=null;
     this.userService.selectedUser=user;
+    let channel = this.channelService.locateDirectChannel(this.userService.authenticatedUser,user);
+    this.messageService.findAll(this.channelService.selectedChannel.id);
     // this.messageService.findAll() awaiting correction of user Channels
 
 

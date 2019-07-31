@@ -3,6 +3,7 @@ import { Subscription } from "./subscription";
 export class Channel {
   id: number;
   name: string;
+  direct: boolean;
   subscriptions: Subscription[];
 
   selectedChannel: number;

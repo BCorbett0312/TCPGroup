@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import { HttpClient} from "@angular/common/http";
 import { Channel } from "../models/channel";
 import {environment} from "../../environments/environment";
+import {User} from "../models/user";
 
 
 
@@ -35,6 +36,30 @@ export class ChannelService{
   }
 
   getSelectedChannel(){
+    return this.selectedChannel;
+  }
+
+  checkIfDirectExists(user1:User,user2:User){
+    for(var i=0;i<user1.channels.length;i++){
+      if(user1.channels[i].direct &&
+        (user2.id==user1.channels[i].subscriptions[0].userId ||
+          user2.id==user1.channels[i].subscriptions[1].userId)) {
+        this.selectedChannel=user1.channels[i];
+        return this.selectedChannel;
+      }
+    }
+    return null;
+  }
+
+  locateDirectChannel(user1:User,user2:User){
+    let answer = this.checkIfDirectExists(user1,user2);
+    if(answer == null) return this.createDirectChannel(user1,user2);
+    return answer;
+  }
+
+  async createDirectChannel(user1:User,user2:User){
+    this.sendto = this.channelsUrl+"/"+user1.id+"/"+user2.id;
+    this.selectedChannel = await this.http.post<Channel>(this.sendto,"").toPromise();
     return this.selectedChannel;
   }
 
