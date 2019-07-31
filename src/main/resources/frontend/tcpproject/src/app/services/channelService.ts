@@ -18,6 +18,7 @@ export class ChannelService{
 
   constructor(private http: HttpClient){
     this.channelsUrl= environment.apiUrl + "/channels";
+    this.selectedChannel = new Channel();
   }
 
   async findAll() {
@@ -36,6 +37,7 @@ export class ChannelService{
   }
 
   getSelectedChannel(){
+
     return this.selectedChannel;
   }
 

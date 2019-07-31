@@ -9,7 +9,7 @@ export class Channel {
   selectedChannel: number;
 
   constructor(){
-    this.selectedChannel = 2;
+    this.id = 2;
     this.name = "default;"
   }
 

@@ -35,9 +35,8 @@ export class MessageComposeComponent implements OnInit {
   }
 
   async onSubmit(){
-    this.message.updateChannelId = this.channelService.selectedChannel.id;
     await this.saveMessage();
-    this.messageService.findAll(this.channelService.selectedChannel.id)
+    this.messageService.findAll(this.channelService.selectedChannel.id);
     this.clearField();
     this.message.body = null;
 

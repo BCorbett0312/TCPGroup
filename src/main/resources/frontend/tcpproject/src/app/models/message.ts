@@ -9,12 +9,19 @@ export class Message {
   constructor() {
 
     this.userId = 2;
-    this.fromUsername = "corby";
+
     this.channelId = 2;
   }
 
 
-  set updateChannelId(value: number) {
+  updateChannelId(value: number) {
     this.channelId = value;
   }
+
+  updateUserId(value: number){
+    this.userId = value;
+  }
+
+
+
 }

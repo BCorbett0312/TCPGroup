@@ -1,13 +1,14 @@
-<table class="table table-fixed  table-striped" style="width: 30%">
-  <tr style="height:50%">
-    <td>
-      <h6>Channels</h6>
-      <ul class="channels">
-        <li *ngFor="let channel of channelService.getChannels()"
-            [class.selected]="channel === channelService.selectedChannel"
-            (click)="onChannelSelect(channel)"><span class="badge">{{channel.name}}</span>
-        </li>
-      </ul>
-    </td>
-  </tr>
+
+<table class="mychannellist" mdbTable mdbTableScroll scrollY="true" maxHeight="200" bordered="true">
+  <thead class ="table-dark bg-dark">
+    <h6 >Channels</h6>
+  </thead>
+  <tbody>
+    <ul class="channellist">
+      <tr *ngFor="let channel of channelService.getChannels()"
+        [class.selected]="channel === channelService.selectedChannel"
+        (click)="onChannelSelect(channel)"><span class="badge">{{channel.name | uppercase}}</span>
+      </tr>
+    </ul>
+  </tbody>
 </table>
