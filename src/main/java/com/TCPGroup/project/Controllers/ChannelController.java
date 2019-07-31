@@ -53,4 +53,9 @@ public class ChannelController {
         return channelService.getStandardChannels();
     }
 
+    @PostMapping("/channels/{id1}/{id2}")
+    public Channel createDirectChannel(@PathVariable Integer id1, @PathVariable Integer id2){
+        return this.channelService.createDirectChannel(id1, id2);
+    }
+
 }
