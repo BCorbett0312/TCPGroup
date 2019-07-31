@@ -49,6 +49,14 @@ export class UserService{
 
   async createNewUser(){
     const t = await this.http.post<User>(this.usersUrl, this.userToCreate).toPromise();
+    if(t.id == -1){
+      //call alert with message that says invalid characters
+      return null;
+    }
+    if(t.id==-2){
+      //call alert with message that says user already exists
+      return null;
+    }
     this.authenticatedUser = t;
     this.updateAuthentication();
     this.clearTextFields();
