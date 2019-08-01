@@ -1,5 +1,7 @@
 package com.TCPGroup.project.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
