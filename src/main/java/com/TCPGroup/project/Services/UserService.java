@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -35,6 +37,20 @@ public class UserService {
     }
 
     public User createUser(User user){
+
+        String regex = "^[a-zA-Z0-9]{1,10}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(user.getUsername());
+
+        if(!matcher.matches()){
+            user.setId(-1);
+            return user;
+        }
+        if(this.userRepository.findByUsername(user.getUsername())!= null){
+            user.setId(-2);
+            return user;
+        }
+
         return userRepository.save(user);
     }
 
