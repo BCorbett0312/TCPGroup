@@ -20,14 +20,12 @@ public class UserTest {
 
     @Test
     public void getPassword() {
-        this.user = new User();
         String actual=this.user.getPassword();
         Assert.assertNull(actual);
     }
 
     @Test
     public void setPassword() {
-        this.user = new User();
         String expected="password";
         this.user.setPassword(expected);
         String actual = this.user.getPassword();
