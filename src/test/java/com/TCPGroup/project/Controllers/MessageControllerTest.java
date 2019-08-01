@@ -2,6 +2,7 @@ package com.TCPGroup.project.Controllers;
 
 import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Repositories.MessageRepository;
+import com.TCPGroup.project.Services.MessageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class MessageControllerTest {
 
     @Mock
-    private MessageRepository messageRepository;
+    private MessageService messageService;
 
     @InjectMocks
     private MessageController messageController;
@@ -27,9 +28,9 @@ public class MessageControllerTest {
 
     @Test
     public void getMessagesByChannelId() {
-        Message message= createMessageMock();
-        when(messageController.getMessagesByChannelId(1)).thenReturn((List<Message>) subData().get(1));
+        when(messageController.getMessagesByChannelId(1)).thenReturn(subData());
         messageController.getMessagesByChannelId(1);
+        verify(messageService, times(1)).getMessageByChannel(1);
     }
 
 
@@ -38,6 +39,7 @@ public class MessageControllerTest {
         Message message= createMessageMock();
         when( messageController.postMessage(message)).thenReturn(message);
         messageController.postMessage(message);
+        verify(messageService, times(1)).postMessage(message);
     }
 
     private List<Message> subData() {return Arrays.asList(new Message(), new Message());}

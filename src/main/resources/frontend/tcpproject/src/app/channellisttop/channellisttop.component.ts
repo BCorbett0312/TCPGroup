@@ -19,7 +19,7 @@ export class ChannellisttopComponent implements OnInit {
               private messageService: MessageService) { }
 
   ngOnInit() {
-    this.channelService.findAll();
+    this.channelService.findAllStandard();
     this.userService.findAll();
 
 

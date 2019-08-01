@@ -67,6 +67,7 @@ public class ChannelService {
     public Channel createDirectChannel(Integer id1, Integer id2){
         Channel direct = new Channel();
         direct.setDirect(true);
+        direct.setName("@direct");
 
         direct = this.channelRepository.save(direct);
 
