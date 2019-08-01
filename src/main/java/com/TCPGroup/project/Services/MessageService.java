@@ -39,6 +39,8 @@ public class MessageService {
     }
 
     public Message postMessage(Message message){
+        String[] words=message.getBody().split("\"");
+        message.setBody(String.join("\\\"",words));
         return messageRepository.save(message);
     }
 

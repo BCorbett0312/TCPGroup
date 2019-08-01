@@ -9,11 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 
@@ -92,7 +90,10 @@ public class UserServiceTest {
 
     private List<User> subData() {return Arrays.asList(new User(), new User());}
 
-    private User createUserMock(){return new User();}
+    private User createUserMock(){
+        User user = new User();
+        user.setUsername("test");
+        return user;}
 
     private List<Subscription> subscriptionList(){
         Subscription sub1 = new Subscription();
