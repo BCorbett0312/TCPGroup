@@ -4,8 +4,6 @@ import { Channel } from "../models/channel";
 import {environment} from "../../environments/environment";
 import {User} from "../models/user";
 
-
-
 @Injectable()
 export class ChannelService{
 
@@ -14,8 +12,6 @@ export class ChannelService{
   selectedChannel: Channel;
   sendto: string;
 
-
-
   constructor(private http: HttpClient){
     this.channelsUrl= environment.apiUrl + "/channels";
     this.selectedChannel = new Channel();
@@ -23,8 +19,10 @@ export class ChannelService{
 
   async findAll() {
     await this.http.get<Channel[]>(this.channelsUrl).subscribe(data => this.channels = data);
+  }
 
-
+  async findAllStandard() {
+    await this.http.get<Channel[]>(this.channelsUrl+"/standard").subscribe(data => this.channels = data);
   }
 
   async findChannelsByUserId(userid:number){
@@ -36,8 +34,13 @@ export class ChannelService{
     return this.channels;
   }
 
-  getSelectedChannel(){
+  getDefaultChannels(){
+    let defChan:Channel[]=new Array(1);
+    defChan[0]=this.channels[0];
+    return defChan;
+  }
 
+  getSelectedChannel(){
     return this.selectedChannel;
   }
 
@@ -53,16 +56,41 @@ export class ChannelService{
     return null;
   }
 
-  locateDirectChannel(user1:User,user2:User){
+  async locateDirectChannel(user1:User,user2:User){
     let answer = this.checkIfDirectExists(user1,user2);
-    if(answer == null) return this.createDirectChannel(user1,user2);
+    if(answer == null) answer = await this.createDirectChannel(user1,user2);
     return answer;
   }
 
-  async createDirectChannel(user1:User,user2:User){
+  createDirectChannel(user1:User,user2:User){
     this.sendto = this.channelsUrl+"/"+user1.id+"/"+user2.id;
-    this.selectedChannel = await this.http.post<Channel>(this.sendto,"").toPromise();
+    this.http.get<Channel>(this.sendto).subscribe(data => this.selectedChannel = data);
     return this.selectedChannel;
   }
+
+  async updateChannelsAfterLogin(user:User){
+    this.sendto = environment.apiUrl + "/users/" + user.id + "/channels";
+    await this.http.get<Channel[]>(this.sendto).subscribe(data => user.channels = data);
+
+  }
+
+  getStandardChannelsUser(user:User){
+      let stdChanCount =0;
+      for(let i=0;i<user.channels.length;i++) if(!user.channels[i].direct) stdChanCount++;
+      let stdChans:Channel[] = new Array(stdChanCount);
+      let counter=0;
+      for(let i=0;i<user.channels.length;i++) if(!user.channels[i].direct) stdChans[counter++]=user.channels[i];
+      console.log(stdChans);
+      return stdChans;
+  }
+  //
+  // getDirectChannelsAuthUser(){
+  //   let dirChanCount =0;
+  //   for(var i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChanCount++;
+  //   let dirChans = new Channel[dirChanCount];
+  //   let counter=0;
+  //   for(i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChans[counter++]=this.authenticatedUser.channels[i];
+  //   return dirChans;
+  // }
 
 }

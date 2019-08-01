@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import { HttpClient} from "@angular/common/http";
 import { User } from "../models/user";
 import {environment} from "../../environments/environment";
+import {Channel} from "../models/channel";
+import {ChannelService} from "./channelService";
 
 
 @Injectable()
@@ -15,6 +17,8 @@ export class UserService{
   public userToCreate: User;
   public userToAuthenticate: User;
 
+  public test: Channel[];
+
   //SelectedUser on List
   public selectedUser: User;
 
@@ -25,7 +29,7 @@ export class UserService{
   public newUserModal = false;
   public loginUserModal = false;
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private channelService: ChannelService){
     this.usersUrl= environment.apiUrl + "/users";
     this.userToAuthenticate = new User;
     this.userToCreate = new User;
@@ -108,6 +112,35 @@ export class UserService{
   getUsers(){
     return this.users;
   }
+
+   async loadChannelsAuthUser(){
+      await this.channelService.updateChannelsAfterLogin(this.authenticatedUser);
+      this.authenticatedUser.channels = this.channelService.channels;
+
+
+
+  }
+  //
+  // getStandardChannelsAuthUser(){
+  //   console.log(this.authenticatedUser.channels);
+  //
+  //   return this.test;
+  //   //   let stdChanCount =0;
+  //   //   for(var i=0;i<this.authenticatedUser.channels.length;i++) if(!this.authenticatedUser.channels[i].direct) stdChanCount++;
+  //   //   let stdChans = new Channel[stdChanCount];
+  //   //   let counter=0;
+  //   //   for(i=0;i<this.authenticatedUser.channels.length;i++) if(!this.authenticatedUser.channels[i].direct) stdChans[counter++]=this.authenticatedUser.channels[i];
+  //   //   return stdChans;
+  // }
+  //
+  // getDirectChannelsAuthUser(){
+  //   let dirChanCount =0;
+  //   for(var i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChanCount++;
+  //   let dirChans = new Channel[dirChanCount];
+  //   let counter=0;
+  //   for(i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChans[counter++]=this.authenticatedUser.channels[i];
+  //   return dirChans;
+  // }
 
 
 }

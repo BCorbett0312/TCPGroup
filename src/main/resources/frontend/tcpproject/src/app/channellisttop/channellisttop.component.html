@@ -5,10 +5,16 @@
   </thead>
   <tbody>
     <ul class="channellist">
-      <tr *ngFor="let channel of channelService.getChannels()"
+      <tr *ngFor="let channel of channelService.getDefaultChannels()"
         [class.selected]="channel === channelService.selectedChannel"
         (click)="onChannelSelect(channel)"><span class="badge">{{channel.name | uppercase}}</span>
       </tr>
+      <div *ngIf="userService.authenticatedUser!=null">
+        <tr *ngFor="let channel of channelService.getStandardChannelsUser(userService.authenticatedUser)"
+            [class.selected]="channel === channelService.selectedChannel"
+            (click)="onChannelSelect(channel)"><span class="badge">{{channel.name | uppercase}}</span>
+        </tr>
+      </div>
     </ul>
   </tbody>
 </table>
