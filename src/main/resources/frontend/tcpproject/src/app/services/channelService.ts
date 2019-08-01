@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import { HttpClient} from "@angular/common/http";
 import { Channel } from "../models/channel";
 import {environment} from "../../environments/environment";
+import {User} from "../models/user";
 
 
 
@@ -32,6 +33,12 @@ export class ChannelService{
   getSelectedChannel(){
 
     return this.selectedChannel;
+  }
+
+  checkIfDirectExist(user1:User, user2:User){
+    for(var channel in user1.channels){
+
+    }
   }
 
 }
