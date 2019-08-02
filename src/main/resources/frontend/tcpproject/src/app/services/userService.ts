@@ -51,10 +51,12 @@ export class UserService{
   async createNewUser(){
     const t = await this.http.post<User>(this.usersUrl, this.userToCreate).toPromise();
     if(t.id == -1){
+      alert("Invalid username! Please use between 1 and 10 alpha numeric characters.")
       //call alert with message that says invalid characters
       return null;
     }
     if(t.id==-2){
+      alert("Username already exists. Please try again!")
       //call alert with message that says user already exists
       return null;
     }
@@ -62,6 +64,7 @@ export class UserService{
     this.updateAuthentication();
     this.clearTextFields();
     this.updateNewUserModal()
+    alert("User successfully created!")
     return t;
 
   }

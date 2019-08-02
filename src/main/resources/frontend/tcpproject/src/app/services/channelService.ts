@@ -4,6 +4,7 @@ import { Channel } from "../models/channel";
 import {environment} from "../../environments/environment";
 import {User} from "../models/user";
 
+
 @Injectable()
 export class ChannelService{
 
@@ -92,5 +93,11 @@ export class ChannelService{
   //   for(i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChans[counter++]=this.authenticatedUser.channels[i];
   //   return dirChans;
   // }
+
+  checkIfDirectExist(user1:User, user2:User){
+    for(var channel in user1.channels){
+
+    }
+  }
 
 }
