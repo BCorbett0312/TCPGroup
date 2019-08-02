@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class MessageService {
@@ -39,8 +41,27 @@ public class MessageService {
     }
 
     public Message postMessage(Message message){
-        String[] words=message.getBody().split("\"");
-        message.setBody(String.join("\\\"",words));
+
+//         String regex = "^.{1,250}$";
+//         Pattern pattern = Pattern.compile(regex);
+//         Matcher matcher = pattern.matcher(message.getBody());
+//         if(!matcher.matches()) {
+//             message.setId(-1);
+//             return message;
+//         }
+
+//         regex = "[^;()]";
+//         pattern.compile(regex);
+//         matcher = pattern.matcher(message.getBody());
+//         if (matcher.matches()) {
+//             message.setId(-2);
+//             return message;
+//         }
+
+// =======
+//         String[] words=message.getBody().split("\"");
+//         message.setBody(String.join("\\\"",words));
+// >>>>>>> master
         return messageRepository.save(message);
     }
 
