@@ -42,22 +42,26 @@ public class MessageService {
 
     public Message postMessage(Message message){
 
-        String regex = "^.{1,250}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(message.getBody());
-        if(!matcher.matches()) {
-            message.setId(-1);
-            return message;
-        }
+//         String regex = "^.{1,250}$";
+//         Pattern pattern = Pattern.compile(regex);
+//         Matcher matcher = pattern.matcher(message.getBody());
+//         if(!matcher.matches()) {
+//             message.setId(-1);
+//             return message;
+//         }
 
-        regex = "[^;()]";
-        pattern.compile(regex);
-        matcher = pattern.matcher(message.getBody());
-        if (matcher.matches()) {
-            message.setId(-2);
-            return message;
-        }
+//         regex = "[^;()]";
+//         pattern.compile(regex);
+//         matcher = pattern.matcher(message.getBody());
+//         if (matcher.matches()) {
+//             message.setId(-2);
+//             return message;
+//         }
 
+// =======
+//         String[] words=message.getBody().split("\"");
+//         message.setBody(String.join("\\\"",words));
+// >>>>>>> master
         return messageRepository.save(message);
     }
 

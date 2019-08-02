@@ -18,7 +18,7 @@ export class LoginbarComponent implements OnInit {
 
 
 
-  constructor(messageService: MessageService, public userService: UserService, channelService: ChannelService) {
+  constructor(messageService: MessageService, public userService: UserService, public channelService: ChannelService) {
   }
 
   ngOnInit() {
@@ -27,6 +27,8 @@ export class LoginbarComponent implements OnInit {
   async onLogin() {
     await this.userService.authenticateUser();
     if (this.userService.authenticatedUser === null) {
+    } else {
+      await this.userService.loadChannelsAuthUser();
     }
   }
 

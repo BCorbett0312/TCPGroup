@@ -67,6 +67,9 @@ public class ChannelService {
     public Channel createDirectChannel(Integer id1, Integer id2){
         Channel direct = new Channel();
         direct.setDirect(true);
+        direct.setName("@direct");
+        // make the name a hash of the two userIds in natural order;
+        // alternatively, create a new column that has "composite key" annotation between two userIds for direcct, and creatorID+channel name for standard
 
         direct = this.channelRepository.save(direct);
 
