@@ -86,4 +86,10 @@ public class ChannelService {
         direct.setSubscriptions(Arrays.asList(sub1, sub2));
         return direct;
     }
+
+    public Channel findDirectChannel(Integer id1, Integer id2){
+        Subscription sub = this.subscriptionService.findDirectChannelSub(id1,id2);
+        if(sub==null) return this.createDirectChannel(id1,id2);
+        return this.channelRepository.getById(sub.getChannelId());
+    }
 }

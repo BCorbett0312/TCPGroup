@@ -37,7 +37,6 @@ export class ChannelService{
 
   getDefaultChannels(){
     let defChan:Channel[]=new Array(0);
-    this.findAll();
     defChan.push(this.channels[0]);
     return defChan;
   }
