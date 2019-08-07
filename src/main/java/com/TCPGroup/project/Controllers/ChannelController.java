@@ -62,4 +62,7 @@ public class ChannelController {
     public Channel findDirectChannel(@PathVariable Integer id1, @PathVariable Integer id2){
         return this.channelService.findDirectChannel(id1, id2);
     }
+
+    @GetMapping("/channels/default")
+    public List<Channel> getDefault(){return this.channelService.getDefaultChannels();}
 }

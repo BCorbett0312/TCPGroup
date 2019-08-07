@@ -92,4 +92,10 @@ public class ChannelService {
         if(sub==null) return this.createDirectChannel(id1,id2);
         return this.channelRepository.getById(sub.getChannelId());
     }
+
+    public List<Channel> getDefaultChannels(){
+        List<Channel> defaults = new ArrayList<>();
+        defaults.add(this.channelRepository.getFirstByDirectFalse());
+        return defaults;
+    }
 }

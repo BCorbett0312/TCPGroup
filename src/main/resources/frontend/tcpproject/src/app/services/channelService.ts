@@ -3,12 +3,15 @@ import { HttpClient} from "@angular/common/http";
 import { Channel } from "../models/channel";
 import {environment} from "../../environments/environment";
 import {User} from "../models/user";
+import {Observable} from "rxjs";
 
 
 @Injectable()
 export class ChannelService{
 
   channels: Channel[];
+  stdChans: Channel[]=[];
+  defaultChans: Channel[] = [];
   channelsUrl: string;
   selectedChannel: Channel;
   sendto: string;
@@ -16,6 +19,7 @@ export class ChannelService{
   constructor(private http: HttpClient){
     this.channelsUrl= environment.apiUrl + "/channels";
     this.selectedChannel = new Channel();
+    this.initDefaultChannels().subscribe(data => this.defaultChans = data);
   }
 
   async findAll() {
@@ -35,38 +39,21 @@ export class ChannelService{
     return this.channels;
   }
 
-  getDefaultChannels(){
-    let defChan:Channel[]=new Array(0);
-    defChan.push(this.channels[0]);
-    return defChan;
+  initDefaultChannels(): Observable <Channel[]> {
+    this.sendto = this.channelsUrl+"/default";
+    return this.http.get<Channel[]>(this.sendto);
   }
 
   getSelectedChannel(){
     return this.selectedChannel;
   }
 
-  checkIfDirectExists(user1:User,user2:User){
-    for(var i=0;i<user1.channels.length;i++){
-      if(user1.channels[i].direct &&
-        (user2.id==user1.channels[i].subscriptions[0].userId ||
-          user2.id==user1.channels[i].subscriptions[1].userId)) {
-        this.selectedChannel=user1.channels[i];
-        return this.selectedChannel;
-      }
-    }
-    return null;
-  }
-
-  async locateDirectChannel(user1:User,user2:User){
-    let answer = this.checkIfDirectExists(user1,user2);
-    if(answer == null) answer = await this.createDirectChannel(user1,user2);
-    return answer;
-  }
-
-  createDirectChannel(user1:User,user2:User){
+  locateDirectChannel(user1:User,user2:User): Observable <Channel>{
     this.sendto = this.channelsUrl+"/"+user1.id+"/"+user2.id;
-    this.http.get<Channel>(this.sendto).subscribe(data => this.selectedChannel = data);
-    return this.selectedChannel;
+    return this.http.get<Channel>(this.sendto);
+
+
+
   }
 
   async updateChannelsAfterLogin(user:User){
@@ -76,28 +63,11 @@ export class ChannelService{
   }
 
   getStandardChannelsUser(user:User){
-      let stdChanCount =0;
-      for(let i=0;i<user.channels.length;i++) if(!user.channels[i].direct) stdChanCount++;
-      let stdChans:Channel[] = new Array(stdChanCount);
-      let counter=0;
-      for(let i=0;i<user.channels.length;i++) if(!user.channels[i].direct) stdChans[counter++]=user.channels[i];
-      console.log(stdChans);
-      return stdChans;
-  }
-  //
-  // getDirectChannelsAuthUser(){
-  //   let dirChanCount =0;
-  //   for(var i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChanCount++;
-  //   let dirChans = new Channel[dirChanCount];
-  //   let counter=0;
-  //   for(i=0;i<this.authenticatedUser.channels.length;i++) if(this.authenticatedUser.channels[i].direct) dirChans[counter++]=this.authenticatedUser.channels[i];
-  //   return dirChans;
-  // }
-
-  checkIfDirectExist(user1:User, user2:User){
-    for(var channel in user1.channels){
-
-    }
+      console.log(user.channels);
+      let stdChans:Channel[]=[];
+      for(let channel of user.channels) if(!channel.direct) stdChans.push(channel);
+      this.stdChans=stdChans;
+      return this.stdChans;
   }
 
 }

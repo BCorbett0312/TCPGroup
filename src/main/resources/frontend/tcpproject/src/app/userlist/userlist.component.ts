@@ -22,13 +22,14 @@ export class UserlistComponent implements OnInit {
     this.userService.findAll();
   }
 
-  onUserSelect(user: User): void{
+  async onUserSelect(user: User){
+    //console.log(this.userService.selectedUser);
     this.userService.selectedUser=user;
-    let channel = this.channelService.locateDirectChannel(this.userService.authenticatedUser,user);
+    this.channelService.locateDirectChannel(this.userService.authenticatedUser,user).subscribe(data => this.channelService.selectedChannel = data);
+
+    this.channelService.updateChannelsAfterLogin(this.userService.authenticatedUser);
+
     this.messageService.findAll(this.channelService.selectedChannel.id);
     // this.messageService.findAll() awaiting correction of user Channels
-
-
   }
-
 }

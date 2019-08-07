@@ -31,7 +31,6 @@ export class MessageComposeComponent implements OnInit {
 
   async saveMessage(){
     await this.messageService.save(this.message);
-
   }
 
   async onSubmit(){

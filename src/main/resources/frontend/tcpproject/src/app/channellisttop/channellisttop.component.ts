@@ -36,7 +36,7 @@ export class ChannellisttopComponent implements OnInit {
   }
 
   getDefaultChannels() {
-    this.defaultChannels = this.channelService.getDefaultChannels();
+    this.channelService.initDefaultChannels().subscribe(data => this.defaultChannels = data);
   }
 
   getSelectedChannel() {

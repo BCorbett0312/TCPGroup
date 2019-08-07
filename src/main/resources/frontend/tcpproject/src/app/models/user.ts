@@ -6,7 +6,7 @@ export class User{
   username: string;
   password: string;
   subscriptions: Subscription[];
-  channels: Channel[];
+  channels: Channel[]=[];
 
 
   constructor(){

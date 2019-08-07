@@ -15,4 +15,6 @@ public interface ChannelRepository extends JpaRepository<Channel, Integer> {
     List<Channel> findAllByDirectFalse();
 
     List<Channel> findAllByIdIn(List<Integer> ids);
+
+    Channel getFirstByDirectFalse();
 }
