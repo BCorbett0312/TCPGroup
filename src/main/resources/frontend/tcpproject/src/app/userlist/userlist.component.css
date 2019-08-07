@@ -2,6 +2,9 @@
   background-color: #CFD8DC !important;
   color: white;
 }
+#userList{
+  background-color: rgba(255,255,255,0.5);
+}
 /*.channels {*/
 /*  flex-basis: 30%;*/
 /*  background-color: darkslategray;*/

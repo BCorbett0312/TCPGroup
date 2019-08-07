@@ -1,6 +1,7 @@
 .mychannellist{
   margin-top: 60px;
   top: 60px;
+  background-color: rgba(255,255,255,0.5);
 }
 
 .selected {

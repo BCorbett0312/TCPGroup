@@ -3,6 +3,7 @@
     <a class="navbar-brand" href="#">Team A & C Communications</a>
     <ul class="nav navbar-nav">
 
+
       <!--------------Shows If User is Not logged in--------->
       <div *ngIf="!userService.userIsAuthenticated">
         <button class="btn btn-outline-light my-2 my-sm-0" type = "button" (click)="userService.updateLoginUserModal()">Login</button>
@@ -16,7 +17,6 @@
         </a>
         <button class="btn btn-outline-light my-2 my-sm-0 logOutButton" type="submit" (click)="onLogOut()">Log Out</button>
       </div>
-
     </ul>
   </div>
 </nav>
