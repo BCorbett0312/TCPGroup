@@ -2,7 +2,6 @@ package com.TCPGroup.project.Services;
 
 import com.TCPGroup.project.Models.Message;
 import com.TCPGroup.project.Repositories.MessageRepository;
-import com.TCPGroup.project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

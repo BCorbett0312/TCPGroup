@@ -7,8 +7,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class UserTest {
 
     private User user;
@@ -20,14 +18,12 @@ public class UserTest {
 
     @Test
     public void getPassword() {
-        this.user = new User();
         String actual=this.user.getPassword();
         Assert.assertNull(actual);
     }
 
     @Test
     public void setPassword() {
-        this.user = new User();
         String expected="password";
         this.user.setPassword(expected);
         String actual = this.user.getPassword();

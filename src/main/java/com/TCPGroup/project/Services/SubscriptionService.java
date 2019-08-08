@@ -1,5 +1,6 @@
 package com.TCPGroup.project.Services;
 
+import com.TCPGroup.project.Models.Channel;
 import com.TCPGroup.project.Models.Subscription;
 import com.TCPGroup.project.Repositories.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class SubscriptionService {
 
     public List<Subscription> createSubscriptions(List<Subscription> subscriptions){
         return this.subscriptionRepository.saveAll(subscriptions);
+    }
+
+    Subscription findDirectChannelSub(Integer id1, Integer id2){
+        return this.subscriptionRepository.findDirectChannelSub(id1,id2);
     }
 }

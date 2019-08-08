@@ -3,6 +3,7 @@ package com.TCPGroup.project.Services;
 import com.TCPGroup.project.Models.Subscription;
 import com.TCPGroup.project.Models.User;
 import com.TCPGroup.project.Repositories.UserRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -54,8 +55,31 @@ public class UserServiceTest {
     public void createUser() {
         User user = createUserMock();
         when(userService.createUser(user)).thenReturn(user);
-        userService.createUser(user);
+        user = userService.createUser(user);
         verify(userRepository, times(1)).save(user);
+    }
+
+    @Test
+    public void createUserInvalid() {
+        User user = createUserMock();
+        user.setUsername("@^#&$&");
+        //when(userService.createUser(user)).thenReturn(user);
+        user = userService.createUser(user);
+        Integer expected=-1;
+        Integer actual = user.getId();
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void createUserDuplicate() {
+        User user = createUserMock();
+        user.setUsername("abc");
+        when(userRepository.findByUsername("abc")).thenReturn(user);
+       // when(userService.createUser(user)).thenReturn(user);
+        user = userService.createUser(user);
+        Integer expected=-2;
+        Integer actual = user.getId();
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
@@ -79,7 +103,7 @@ public class UserServiceTest {
     @Test
     public void getUsersByChannelId() {
         List<User> users = subData();
-        List<Integer> ids = Arrays.asList(1,2);
+ //       List<Integer> ids = Arrays.asList(1,2);
         when(userService.getUsersByChannelId(2)).thenReturn(users);
         when(subscriptionService.getSubscriptionsByChannelId(2)).thenReturn(subscriptionList());
         userService.getUsersByChannelId(2);

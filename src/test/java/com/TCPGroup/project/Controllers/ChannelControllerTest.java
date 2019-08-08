@@ -68,8 +68,8 @@ public class ChannelControllerTest {
     @Test
     public void createDirectChannel() {
         Channel channel = channelMock();
-        when(channelController.createDirectChannel(2,3)).thenReturn(channel);
-        channelController.createDirectChannel(2,3);
+        when(channelController.findDirectChannel(2,3)).thenReturn(channel);
+        channelController.findDirectChannel(2,3);
         verify(channelService,times(1)).createDirectChannel(2,3);
     }
 
