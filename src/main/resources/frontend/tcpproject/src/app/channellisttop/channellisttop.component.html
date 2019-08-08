@@ -10,8 +10,8 @@
         [class.selected]="channel === selectedChannel"
         (click)="onChannelSelect(channel)"><span class="badge">{{channel.name | uppercase}}</span>
       </tr>
-      <div *ngIf="this.authenticatedUser!=null">
-        <tr *ngFor="let channel of channelService.getStandardChannelsUser(this.authenticatedUser)"
+      <div *ngIf="this.userService.authenticatedUser!=null">
+        <tr *ngFor="let channel of channelService.getStandardChannelsUser(this.userService.authenticatedUser)"
             [class.selected]="channel === selectedChannel"
             (click)="onChannelSelect(channel)"><span class="badge">{{channel.name | uppercase}}</span>
         </tr>

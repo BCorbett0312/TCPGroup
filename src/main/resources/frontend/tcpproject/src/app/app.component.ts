@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {User} from "./models/user";
-import {Channel} from "./models/channel";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +7,4 @@ import {Channel} from "./models/channel";
 })
 export class AppComponent {
   title = 'tcpproject';
-  public authenticatedUser: User;
-  public selectedChannel: Channel;
 }

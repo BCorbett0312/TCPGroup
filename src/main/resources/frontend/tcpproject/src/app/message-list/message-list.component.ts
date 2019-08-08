@@ -1,8 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MessageService} from "../services/messageService";
 import {ChannelService} from "../services/channelService";
-import {User} from "../models/user";
-import {Channel} from "../models/channel";
 
 @Component({
   selector: 'app-message-list',
@@ -11,8 +9,6 @@ import {Channel} from "../models/channel";
 })
 export class MessageListComponent implements OnInit {
 
-  @Input() authenticatedUser:User;
-  @Input() selectedChannel:Channel;
 
   constructor(public messageService: MessageService, private channelService: ChannelService) { }
 
@@ -21,7 +17,7 @@ export class MessageListComponent implements OnInit {
   }
 
   updateMessageList() {
-    this.messageService.findAll(this.selectedChannel.id);
+    this.messageService.findAll(this.channelService.selectedChannel.id);
   }
 
 

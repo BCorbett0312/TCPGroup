@@ -4,9 +4,7 @@ import { Message } from "../models/message";
 import {environment} from "../../environments/environment";
 import {UserService} from "./userService";
 import {ChannelService} from "./channelService";
-//import {__await} from "tslib";
-import {Channel} from "../models/channel";
-import {User} from "../models/user";
+import {__await} from "tslib";
 
 
 
@@ -18,21 +16,21 @@ export class MessageService{
   messageToSave: Message;
 
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private userService: UserService, private channelService: ChannelService){
     this.messagesUrl= environment.apiUrl + "/messages";
   }
 
-  async save(message: Message, selectedChannel:Channel, authenticatedUser:User){
+  async save(message: Message){
     this.messageToSave = message;
-    this.updateMessageData(this.messageToSave, selectedChannel, authenticatedUser);
+    this.updateMessageData(this.messageToSave);
     const t = await this.http.post(this.messagesUrl, this.messageToSave).toPromise();
     return t;
   }
 
 
-  updateMessageData(message: Message, selectedChannel:Channel, authenticatedUser:User){
-    message.updateChannelId(selectedChannel.id);
-    message.updateUserId(authenticatedUser.id);
+  updateMessageData(message: Message){
+    message.updateChannelId(this.channelService.selectedChannel.id);
+    message.updateUserId(this.userService.authenticatedUser.id);
     console.log(message);
     return message;
   }

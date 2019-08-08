@@ -13,7 +13,7 @@
       <!------------Shows if User is Logged in----------->
       <div *ngIf="userService.userIsAuthenticated">
         <a class="navbar-brand navbar-right" href="#">
-          Welcome {{authenticatedUser.username}}
+          Welcome {{userService.authenticatedUser.username}}
         </a>
         <button class="btn btn-outline-light my-2 my-sm-0 logOutButton" type="submit" (click)="onLogOut()">Log Out</button>
       </div>
