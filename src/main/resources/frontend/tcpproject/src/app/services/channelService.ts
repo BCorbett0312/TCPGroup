@@ -11,14 +11,14 @@ export class ChannelService{
 
   channels: Channel[];
   stdChans: Channel[]=[];
-  defaultChans: Channel[] = [];
+  defaultChans: Channel[]=[];
   channelsUrl: string;
-  selectedChannel: Channel;
+  //selectedChannel: Channel;
   sendto: string;
 
   constructor(private http: HttpClient){
     this.channelsUrl= environment.apiUrl + "/channels";
-    this.selectedChannel = new Channel();
+   // this.selectedChannel = new Channel();
     this.initDefaultChannels().subscribe(data => this.defaultChans = data);
   }
 
@@ -44,15 +44,13 @@ export class ChannelService{
     return this.http.get<Channel[]>(this.sendto);
   }
 
-  getSelectedChannel(){
-    return this.selectedChannel;
-  }
+  // getSelectedChannel(){
+  //   return this.selectedChannel;
+  // }
 
   locateDirectChannel(user1:User,user2:User): Observable <Channel>{
     this.sendto = this.channelsUrl+"/"+user1.id+"/"+user2.id;
     return this.http.get<Channel>(this.sendto);
-
-
 
   }
 
@@ -62,7 +60,7 @@ export class ChannelService{
 
   }
 
-  getStandardChannelsUser(user:User){
+  getStandardChannelsUser(user:User): Channel[]{
       console.log(user.channels);
       let stdChans:Channel[]=[];
       for(let channel of user.channels) if(!channel.direct) stdChans.push(channel);

@@ -1,9 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageService} from "../services/messageService";
 import {Message} from "../models/message";
 import {ChannelService} from "../services/channelService";
 import {UserService} from "../services/userService";
+import {User} from "../models/user";
+import {Channel} from "../models/channel";
 
 
 @Component({
@@ -13,6 +15,8 @@ import {UserService} from "../services/userService";
 })
 export class MessageComposeComponent implements OnInit {
 
+  @Input() authenticatedUser:User;
+  @Input() selectedChannel:Channel;
 
   message: Message;
   @ViewChild("messageField", { static: false }) messageField: ElementRef;
@@ -30,12 +34,12 @@ export class MessageComposeComponent implements OnInit {
 
 
   async saveMessage(){
-    await this.messageService.save(this.message);
+    await this.messageService.save(this.message, this.selectedChannel, this.authenticatedUser);
   }
 
   async onSubmit(){
     await this.saveMessage();
-    this.messageService.findAll(this.channelService.selectedChannel.id);
+    this.messageService.findAll(this.selectedChannel.id);
     this.clearField();
     this.message.body = null;
 

@@ -1,9 +1,9 @@
 
 <!--The content below is only a placeholder and can be replaced.-->
 <div class ="image">
-<app-message-list></app-message-list>
-<app-message-compose></app-message-compose>
-<app-loginbar></app-loginbar>
-<app-channellisttop></app-channellisttop>
-<app-userlist></app-userlist>
+<app-message-list [authenticatedUser]="authenticatedUser" [selectedChannel]="selectedChannel"></app-message-list>
+<app-message-compose [authenticatedUser]="authenticatedUser" [selectedChannel]="selectedChannel"></app-message-compose>
+<app-loginbar [authenticatedUser]="authenticatedUser" [selectedChannel]="selectedChannel"></app-loginbar>
+<app-channellisttop [authenticatedUser]="authenticatedUser" [selectedChannel]="selectedChannel"></app-channellisttop>
+<app-userlist [authenticatedUser]="authenticatedUser" [selectedChannel]="selectedChannel"></app-userlist>
 </div>

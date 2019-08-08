@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../services/userService";
 import {MessageService} from "../services/messageService";
 import {ChannelService} from "../services/channelService";
@@ -12,6 +12,8 @@ import {Channel} from "../models/channel";
 })
 export class UserlistComponent implements OnInit {
 
+  @Input() authenticatedUser:User;
+  @Input() selectedChannel:Channel;
 
 
   constructor(public userService: UserService,
@@ -25,11 +27,11 @@ export class UserlistComponent implements OnInit {
   async onUserSelect(user: User){
     //console.log(this.userService.selectedUser);
     this.userService.selectedUser=user;
-    this.channelService.locateDirectChannel(this.userService.authenticatedUser,user).subscribe(data => this.channelService.selectedChannel = data);
+    this.channelService.locateDirectChannel(this.authenticatedUser,user).subscribe(data => this.selectedChannel = data);
 
-    this.channelService.updateChannelsAfterLogin(this.userService.authenticatedUser);
+    this.channelService.updateChannelsAfterLogin(this.authenticatedUser);
 
-    this.messageService.findAll(this.channelService.selectedChannel.id);
+    this.messageService.findAll(this.selectedChannel.id);
     // this.messageService.findAll() awaiting correction of user Channels
   }
 }

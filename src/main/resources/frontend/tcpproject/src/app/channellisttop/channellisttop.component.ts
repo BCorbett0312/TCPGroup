@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ChannelService} from "../services/channelService";
 import {UserService} from "../services/userService";
 import {Channel} from "../models/channel";
@@ -13,9 +13,9 @@ import {User} from "../models/user";
 export class ChannellisttopComponent implements OnInit {
 
   defaultChannels: Channel[] = [];
-  selectedChannel: Channel = new Channel();
+  @Input() selectedChannel: Channel;
   users: User[] = [];
-  authenticatedUser: User = new User();
+  @Input() authenticatedUser: User;
 
   constructor(
     public userService: UserService,
@@ -30,34 +30,33 @@ export class ChannellisttopComponent implements OnInit {
 
      */
     this.getDefaultChannels();
-    this.getSelectedChannel();
+  //  this.getSelectedChannel();
     this.getUsers();
-    this.getAuthenticatedUser();
+  //  this.getAuthenticatedUser();
   }
+
 
   getDefaultChannels() {
     this.channelService.initDefaultChannels().subscribe(data => this.defaultChannels = data);
   }
 
-  getSelectedChannel() {
-    this.selectedChannel = this.channelService.getSelectedChannel();
-  }
+  // getSelectedChannel() {
+  //   this.selectedChannel = this.getSelectedChannel();
+  // }
 
   getUsers(){
     this.userService.findAll();
     this.users = this.userService.getUsers();
   }
 
-  getAuthenticatedUser(){
-    this.authenticatedUser=this.userService.authenticatedUser;
-  }
+  // getAuthenticatedUser(){
+  //   this.authenticatedUser=this.userService.authenticatedUser;
+  // }
 
   onChannelSelect(channel: Channel): void{
-    this.channelService.selectedChannel=channel;
+    this.selectedChannel=channel;
     this.userService.selectedUser = null;
     this.messageService.findAll(channel.id);
   }
-
-
 
 }

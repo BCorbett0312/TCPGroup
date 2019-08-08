@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MessageService} from "../services/messageService";
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../services/userService";
 import {ChannelService} from "../services/channelService";
 import {User} from "../models/user";
+import {Channel} from "../models/channel";
 
 @Component({
   selector: 'app-loginbar',
@@ -16,28 +16,29 @@ export class LoginbarComponent implements OnInit {
   @ViewChild("loginPasswordField", {static: false}) loginPasswordField: ElementRef;
   @ViewChild("loginUserNameField", {static: false}) loginUserNameField: ElementRef;
 
+  @Input() authenticatedUser:User;
+  @Input() selectedChannel:Channel;
 
-
-  constructor(messageService: MessageService, public userService: UserService, public channelService: ChannelService) {
+  constructor(public userService: UserService, public channelService: ChannelService) {
   }
 
   ngOnInit() {
   }
 
   async onLogin() {
-    await this.userService.authenticateUser();
-    if (this.userService.authenticatedUser === null) {
+    await this.userService.authenticateUser(this.authenticatedUser);
+    if (this.authenticatedUser === null) {
     } else {
-      await this.userService.loadChannelsAuthUser();
+      await this.userService.loadChannelsAuthUser(this.authenticatedUser);
     }
   }
 
   onLogOut(){
-    this.userService.logOut();
+    this.userService.logOut(this.authenticatedUser);
   }
 
   onCreateUser(){
-    this.userService.createNewUser().then().catch(this.userService.updateShowErrorCreatingUser);
+    this.userService.createNewUser(this.authenticatedUser).then().catch(this.userService.updateShowErrorCreatingUser);
     this.clearCreateField();
   }
 

@@ -13,7 +13,7 @@ export class UserService{
   public users: User[];
 
   //User Objects for authentication and creation
-  public authenticatedUser: User;
+  //public authenticatedUser: User;
   public userToCreate: User;
   public userToAuthenticate: User;
 
@@ -40,15 +40,19 @@ export class UserService{
 
   }
 
-  async authenticateUser(){
+  async authenticateUser(authenticatedUser:User){
     this.sendto = this.usersUrl + "/auth";
+    console.log(this.userToAuthenticate.username+"1");
     const t = await this.http.post<User>(this.sendto, this.userToAuthenticate).toPromise();
-    this.authenticatedUser = t;
-    this.checkAuthentication();
+    console.log(this.userToAuthenticate.username+"2");
+    authenticatedUser=t;
+    console.log(authenticatedUser.id+"3");
+    //this.authenticatedUser = authenticatedUser;
+    this.checkAuthentication(authenticatedUser);
     return t;
   }
 
-  async createNewUser(){
+  async createNewUser(authenticatedUser:User){
     const t = await this.http.post<User>(this.usersUrl, this.userToCreate).toPromise();
     if(t.id == -1){
       alert("Invalid username! Please use between 1 and 10 alpha numeric characters.")
@@ -60,23 +64,23 @@ export class UserService{
       //call alert with message that says user already exists
       return null;
     }
-    this.authenticatedUser = t;
-    this.updateAuthentication();
+    authenticatedUser=t;
+    //this.authenticatedUser = authenticatedUser;
+    this.updateAuthentication(authenticatedUser);
     this.clearTextFields();
     this.updateNewUserModal()
     alert("User successfully created!")
     return t;
-
   }
 
-  updateAuthentication(){
-    if(this.authenticatedUser.id > 0){
+  updateAuthentication(authenticatedUser:User){
+    if(authenticatedUser.id > 0){
       this.userIsAuthenticated = true;}
   }
 
 
-  checkAuthentication(){
-    if(this.authenticatedUser.id > 0){
+  checkAuthentication(authenticatedUser:User){
+    if(authenticatedUser.id > 0){
       this.userIsAuthenticated = true;
       this.updateLoginUserModal();
     }
@@ -102,8 +106,8 @@ export class UserService{
       this.showNavBar=true}
   }
 
-  logOut(){
-    this.authenticatedUser = null;
+  logOut(authenticatedUser:User){
+    authenticatedUser = null;
     this.userIsAuthenticated = false;
     this.userToAuthenticate = new User;
   }
@@ -124,12 +128,9 @@ export class UserService{
     return this.users;
   }
 
-   async loadChannelsAuthUser(){
-      await this.channelService.updateChannelsAfterLogin(this.authenticatedUser);
-      this.authenticatedUser.channels = this.channelService.channels;
-
-
-
+   async loadChannelsAuthUser(authenticatedUser:User){
+      await this.channelService.updateChannelsAfterLogin(authenticatedUser);
+      authenticatedUser.channels = this.channelService.channels;
   }
   //
   // getStandardChannelsAuthUser(){
