@@ -2,7 +2,7 @@
 
   height:1000px; background-size:cover; width:auto;
 
-  background-image:url("https://wallpapershome.com/images/pages/pic_h/20310.jpg");
+  background-image:url("../images/background.jpg");
   /*background-position:50% 50%;*/
   z-index: -1;
 }
