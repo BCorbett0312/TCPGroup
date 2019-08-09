@@ -19,7 +19,7 @@ export class ChannellisttopComponent implements OnInit {
 
   constructor(
     public userService: UserService,
-              private channelService: ChannelService,
+              public channelService: ChannelService,
               private messageService: MessageService
   ) { }
 
